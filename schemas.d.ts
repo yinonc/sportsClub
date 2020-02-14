@@ -3,6 +3,7 @@ type GameType = 'soccer' | 'basketball' | 'tennis' | 'running' | 'cycling';
 interface Game {
     type: GameType;
     icon: string;
+    displayName: string; // Maybe we can use GameType as display name?
 }
 
 interface User {
