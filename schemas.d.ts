@@ -16,17 +16,22 @@ interface User {
     profileImage: string; // should be URL / URI
     favoriteGame: Game;
     email?: string;
+    friends: User[];
 }
 
+type participantType = 'GroupManager' | 'Regular';
+
 interface Group {
-    users: User[];
+    users: {
+        [userId: string]: participantType;
+    }; // In this way we can save both the 'participantType' and to get user in group with o(1) complexity.
     private: boolean;
     events: SportEvent[];
 }
 
 interface SportEvent {
     users: User[];
-    gameType: GameType;
+    game: Game;
     maxUsers: number;
     location: string; // Google place id / something else ?
     date: Date;
