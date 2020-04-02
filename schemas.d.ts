@@ -1,12 +1,17 @@
-type GameType = 'soccer' | 'basketball' | 'tennis' | 'running' | 'cycling'
+export type GameType =
+    | 'soccer'
+    | 'basketball'
+    | 'tennis'
+    | 'running'
+    | 'cycling'
 
-interface Game {
+export interface Game {
     type: GameType
     icon: string
     displayName: string // Maybe we can use GameType as display name?
 }
 
-interface User {
+export interface UserData {
     id: string // Unique key
     firstName: string
     lastName: string
@@ -19,9 +24,9 @@ interface User {
     friends: User[]
 }
 
-type participantType = 'GroupManager' | 'Regular'
+export type participantType = 'GroupManager' | 'Regular'
 
-interface Group {
+export interface Group {
     users: {
         [userId: string]: participantType
     } // In this way we can save both the 'participantType' and to get user in group with o(1) complexity.
@@ -29,8 +34,8 @@ interface Group {
     events: SportEvent[]
 }
 
-interface SportEvent {
-    users: User[]
+export interface SportEvent {
+    userIds: UserData['id'][]
     game: Game
     maxUsers: number
     location: string // Google place id / something else ?

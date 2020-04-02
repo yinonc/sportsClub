@@ -6,7 +6,7 @@ export default {
         },
         SEARCH: {
             name: 'SEARCH',
-            symbolName: 'map-search' //'table-search'
+            symbolName: 'map-search'
         },
         PROFILE: {
             name: 'PROFILE',
