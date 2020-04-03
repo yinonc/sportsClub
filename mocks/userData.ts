@@ -1,6 +1,6 @@
-import {UserData} from "../schemas";
+import { UserData } from '../schemas'
 
-export function getMockUserData() : UserData {
+export function getMockUserData(): UserData {
     return {
         id: 'some_user_id',
         firstName: 'Leonel',

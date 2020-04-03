@@ -4,20 +4,19 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import { AppState } from '../appState/appInitialState'
 import { setIsLogged } from '../appState/stateActions'
 import { UserData } from '../../schemas'
-import {getMockUserData} from "../../mocks/userData";
+import { getMockUserData } from '../../mocks/userData'
 
 interface LoginScreenProps {
     setIsLogged(userData: UserData): void
 }
 
 const getUserData = async (): Promise<UserData> => {
-    return getMockUserData();
+    return getMockUserData()
 }
 
 class LoginScreenPure extends React.Component<LoginScreenProps> {
-
     handleLoginPress() {
-        getUserData().then(userData => {
+        getUserData().then((userData) => {
             this.props.setIsLogged(userData)
         })
     }

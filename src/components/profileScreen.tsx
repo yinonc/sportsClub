@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import {AppState} from "../appState/appInitialState";
+import { AppState } from '../appState/appInitialState'
 import { connect } from 'react-redux'
-import {UserData} from "../../schemas";
+import { UserData } from '../../schemas'
 
 interface ProfileScreenStateProps {
-    userData: UserData;
+    userData: UserData
 }
 
 class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
@@ -15,7 +15,8 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                 <Text>Profile screen</Text>
                 <Image
                     style={styles.image}
-                    source={require(`../../mocks/messi.png`)} />
+                    source={require(`../../mocks/messi.png`)}
+                />
                 <Text>{`${this.props.userData.firstName} ${this.props.userData.lastName}`}</Text>
             </View>
         )
@@ -28,7 +29,10 @@ const mapStateToProps = (state: AppState): ProfileScreenStateProps => ({
 
 const mapDispatchToProps = (dispatch) => ({})
 
-const ProfileScreen = connect(mapStateToProps, mapDispatchToProps)(ProfileScreenPure)
+const ProfileScreen = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProfileScreenPure)
 
 export default ProfileScreen
 
