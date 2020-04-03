@@ -16,10 +16,10 @@ export interface UserData {
     firstName: string
     lastName: string
     nickName: string
-    age: Date
+    dateOfBirth: Date
     rate: number
     profileImage: string // should be URL / URI
-    favoriteGame: Game
+    favoriteGames: GameType[]
     email?: string
     friends: User[]
 }
