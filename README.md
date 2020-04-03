@@ -19,3 +19,18 @@ $ npm install -g expo-cli
 $ npm install
 $ npm start
 ```
+
+
+### Using icons:
+We're working with open source library for icons.
+Usage:
+```javascript
+import { MaterialCommunityIcons } from 'react-native-vector-icons'
+
+<MaterialCommunityIcons
+    name="Home"
+    size={size}
+    color={color}
+/>
+```
+All list of icons detailed here: https://github.com/oblador/react-native-vector-icons/blob/master/glyphmaps/MaterialCommunityIcons.json
