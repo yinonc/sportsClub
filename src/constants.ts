@@ -1,5 +1,17 @@
 export default {
     SCREENS: {
+        WELCOME: {
+            name: 'WELCOME',
+            symbolName: 'location-enter'
+        },
+        LOGIN: {
+            name: 'LOGIN',
+            symbolName: 'login'
+        },
+        REGISTER: {
+            name: 'REGISTER',
+            symbolName: 'cash-register'
+        },
         HOME: {
             name: 'HOME',
             symbolName: 'home'

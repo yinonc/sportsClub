@@ -1,13 +1,39 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { connect } from 'react-redux'
+import {Button, StyleSheet, Text, View} from 'react-native'
+import {AppState} from "../appState/appInitialState";
+import {setIsLogged} from "../appState/stateActions";
+import {UserData} from "../../schemas";
 
-export default function LoginScreen() {
-    return (
-        <View style={styles.container}>
-            <Text>Login here:</Text>
-        </View>
-    )
+interface LoginScreenProps {
+    setIsLogged(userData: UserData): void;
 }
+
+class LoginScreenPure extends React.Component<LoginScreenProps> {
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text>Login Screen:</Text>
+                <Button
+                    onPress={() =>
+                        this.props.setIsLogged({} as UserData)
+                    }
+                    title="Click here to set login"
+                />
+            </View>
+        )
+    }
+}
+
+const mapStateToProps = (state: AppState) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+    setIsLogged: (userData) => dispatch(setIsLogged(userData))
+})
+
+const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(LoginScreenPure)
+
+export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
