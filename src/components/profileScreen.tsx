@@ -30,8 +30,8 @@ const mapStateToProps = (state: AppState): ProfileScreenStateProps => ({
 const mapDispatchToProps = (dispatch) => ({})
 
 const ProfileScreen = connect(
-    mapStateToProps,
-    mapDispatchToProps
+    mapStateToProps, // called every time state is changed
+    mapDispatchToProps // Calls once when init
 )(ProfileScreenPure)
 
 export default ProfileScreen
