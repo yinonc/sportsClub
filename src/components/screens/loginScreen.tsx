@@ -1,10 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, StyleSheet, Text, View } from 'react-native'
-import { AppState } from '../appState/appInitialState'
-import { setUserData } from '../appState/stateActions'
-import { UserData } from '../../schemas'
-import { getMockUserData } from '../../mocks/userData'
+import { AppState } from '../../appState/appInitialState'
+import { setUserData } from '../../appState/stateActions'
+import { UserData } from '../../../schemas'
+import { getMockUserData } from '../../../mocks/userData'
 
 interface LoginScreenProps {
     setUserData(userData: UserData): void

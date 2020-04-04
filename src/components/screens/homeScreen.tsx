@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import { setCounter } from '../appState/stateActions'
-import { AppState } from '../appState/appInitialState'
+import { setCounter } from '../../appState/stateActions'
+import { AppState } from '../../appState/appInitialState'
 
 interface HomeScreenProps {
     counter: number

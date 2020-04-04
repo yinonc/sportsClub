@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Text, View } from 'react-native'
-import constants from '../constants'
+import constants from '../../constants'
 
 export default function WelcomeScreen({ navigation }) {
     return (

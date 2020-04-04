@@ -4,17 +4,17 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 import { Provider, connect } from 'react-redux'
 
-import HomeScreen from './homeScreen'
-import SearchScreen from './searchScreen'
-import GroupsScreen from './groupsScreen'
-import ProfileScreen from './profileScreen'
+import HomeScreen from './screens/homeScreen'
+import SearchScreen from './screens/searchScreen'
+import GroupsScreen from './screens/groupsScreen'
+import ProfileScreen from './screens/profileScreen'
 
 import constants from '../constants'
 import { AppState } from '../appState/appInitialState'
-import LoginScreen from './loginScreen'
-import RegisterScreen from './registerScreen'
+import LoginScreen from './screens/loginScreen'
+import RegisterScreen from './screens/registerScreen'
 import { createStackNavigator } from '@react-navigation/stack'
-import WelcomeScreen from './welcomeScreen'
+import WelcomeScreen from './screens/welcomeScreen'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
