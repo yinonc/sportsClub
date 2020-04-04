@@ -1,6 +1,6 @@
 import { GameType } from '../../../schemas'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 
 export interface GroupBoxProps {
@@ -12,12 +12,20 @@ export interface GroupBoxProps {
 
 export default class GroupBox extends React.Component<GroupBoxProps> {
     render() {
+        console.log('-----------------------------------------------------------------')
+        console.log(this.props.imageUri)
+        console.log('-----------------------------------------------------------------')
+
         return (
             <View style={styles.container}>
-                <Text>{this.props.title}</Text>
+                <View style={styles.groupImageWrapper}>
+                    <Image style={styles.groupImage} source={{uri:this.props.imageUri}} />
+                </View>
+                <Text style={styles.title}>{this.props.title}</Text>
                 <MaterialCommunityIcons
+                    style={styles.gameTypeIcon}
                     name={this.props.gameType}
-                    size={20}
+                    size={30}
                     color="black"
                 />
             </View>
@@ -27,11 +35,29 @@ export default class GroupBox extends React.Component<GroupBoxProps> {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        marginTop: 10,
         borderWidth: 1,
+        borderColor: 'gray',
+        borderRadius: 8,
         padding: 5,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'center'
+    },
+    groupImageWrapper: {
+        flex: 1,
+        marginLeft: 6,
+    },
+    groupImage: {
+        width: 40,
+        height: 40,
+        borderRadius: 100,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    title: {
+        flex: 5,
+    },
+    gameTypeIcon: {
+        flex: 1
     }
 })

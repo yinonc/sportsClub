@@ -4,6 +4,7 @@ export type GameType =
     | 'tennis'
     | 'running'
     | 'cycling'
+    | 'baseball'
 
 export interface Game {
     type: GameType

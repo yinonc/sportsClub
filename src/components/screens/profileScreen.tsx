@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { UserData } from '../../../schemas'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 import GroupBox, { GroupBoxProps } from '../genericComponents/genericGroupBox'
+import {getGroupsData} from "../../../mocks/userData";
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -14,29 +15,6 @@ function calculateAge(date: Date): number {
     const ageDifMs = Date.now() - date.getTime()
     const ageDate = new Date(ageDifMs)
     return Math.abs(ageDate.getUTCFullYear() - 1970)
-}
-
-function getGroupsData(): GroupBoxProps[] {
-    return [
-        {
-            title: 'Habolbolim1',
-            imageUri:
-                'https://png.pngtree.com/element_origin_min_pic/16/07/04/16577a199ed30bd.jpg',
-            gameType: 'soccer'
-        },
-        {
-            title: 'Habolbolim2',
-            imageUri:
-                'https://png.pngtree.com/element_origin_min_pic/16/07/04/16577a199ed30bd.jpg',
-            gameType: 'soccer'
-        },
-        {
-            title: 'Habolbolim3',
-            imageUri:
-                'https://png.pngtree.com/element_origin_min_pic/16/07/04/16577a199ed30bd.jpg',
-            gameType: 'soccer'
-        }
-    ]
 }
 
 class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
@@ -117,9 +95,7 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                             data={getGroupsData()}
                             renderItem={({ item }) => (
                                 <GroupBox
-                                    gameType={item.gameType}
-                                    imageUri=""
-                                    title={item.title}
+                                    {...item}
                                 />
                             )}
                             keyExtractor={(item) => item.title}
@@ -184,15 +160,15 @@ const styles = StyleSheet.create({
         color: '#696969'
     },
     boxesWrapper: {
-        borderWidth: 1,
         flexDirection: 'row',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        alignSelf: 'stretch',
+        justifyContent: 'space-around'
     },
     favoriteGameWrapper: {
         flexDirection: 'row'
     },
     menuBox: {
-        width: 90,
         height: 60,
         alignItems: 'center',
         justifyContent: 'center',
@@ -206,8 +182,9 @@ const styles = StyleSheet.create({
         elevation: 4
     },
     age: {
+        marginTop: 2,
         marginRight: 'auto',
-        marginLeft: 20
+        marginLeft: 10
     },
     ageName: {
         marginRight: 5,
@@ -216,10 +193,10 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     groupsHeader: {
-        marginTop: 5,
+        marginTop: 14,
         flexDirection: 'row',
         marginRight: 'auto',
-        marginLeft: 20
+        marginLeft: 10
     },
     groupsHeaderName: {
         marginRight: 5,
@@ -231,5 +208,8 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#696969'
     },
-    groupsListContainer: {}
+    groupsListContainer: {
+        alignSelf: 'stretch',
+        margin: 10,
+    }
 })
