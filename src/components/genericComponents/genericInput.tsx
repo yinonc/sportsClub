@@ -11,7 +11,7 @@ export default function GenericInput(props) {
         <TextInput
             style={styles.textInput}
             placeholder={props.placeHolder}
-            placeholderTextColor='white'
+            placeholderTextColor="white"
             onChangeText={props.onChangeText}
             onFocus={props.onFocus}
         />
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
         marginTop: 16,
         paddingVertical: 8,
         borderWidth: 1,
-        borderColor: "#20232a",
+        borderColor: '#20232a',
         borderRadius: 6,
-        backgroundColor: "#0294F6",
-        color: "white",
-        textAlign: "center",
-        fontSize: 20,        
-      }
+        backgroundColor: '#0294F6',
+        color: 'white',
+        textAlign: 'center',
+        fontSize: 20
+    }
 })

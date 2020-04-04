@@ -22,6 +22,7 @@ export interface UserData {
     favoriteGames: GameType[]
     email?: string
     friends: User[]
+    gamesPlayed: number
 }
 
 export type participantType = 'GroupManager' | 'Regular'

@@ -10,7 +10,8 @@ export function getMockUserData(): UserData {
         nickName: 'Leo',
         friends: [],
         profileImage: 'messi.png',
-        favoriteGames: ['soccer'],
-        rate: 99
+        favoriteGames: ['soccer', 'basketball'],
+        rate: 8.7,
+        gamesPlayed: 102
     }
 }

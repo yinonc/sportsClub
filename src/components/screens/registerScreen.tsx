@@ -8,17 +8,14 @@ const steps = {
 }
 
 export default class RegisterScreen extends React.Component {
-
     onChangeText = () => {
-        console.log("onChangeText called");
+        console.log('onChangeText called')
     }
     onFocus = () => {
-        console.log("onFocus called");
+        console.log('onFocus called')
     }
 
-    onContinue = () => {
-        
-    }
+    onContinue = () => {}
 
     render() {
         return (
