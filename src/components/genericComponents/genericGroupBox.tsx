@@ -12,14 +12,21 @@ export interface GroupBoxProps {
 
 export default class GroupBox extends React.Component<GroupBoxProps> {
     render() {
-        console.log('-----------------------------------------------------------------')
+        console.log(
+            '-----------------------------------------------------------------'
+        )
         console.log(this.props.imageUri)
-        console.log('-----------------------------------------------------------------')
+        console.log(
+            '-----------------------------------------------------------------'
+        )
 
         return (
             <View style={styles.container}>
                 <View style={styles.groupImageWrapper}>
-                    <Image style={styles.groupImage} source={{uri:this.props.imageUri}} />
+                    <Image
+                        style={styles.groupImage}
+                        source={{ uri: this.props.imageUri }}
+                    />
                 </View>
                 <Text style={styles.title}>{this.props.title}</Text>
                 <MaterialCommunityIcons
@@ -45,7 +52,7 @@ const styles = StyleSheet.create({
     },
     groupImageWrapper: {
         flex: 1,
-        marginLeft: 6,
+        marginLeft: 6
     },
     groupImage: {
         width: 40,
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
         borderColor: 'white'
     },
     title: {
-        flex: 5,
+        flex: 5
     },
     gameTypeIcon: {
         flex: 1

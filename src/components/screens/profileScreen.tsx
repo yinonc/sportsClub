@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { UserData } from '../../../schemas'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 import GroupBox, { GroupBoxProps } from '../genericComponents/genericGroupBox'
-import {getGroupsData} from "../../../mocks/userData";
+import { getGroupsData } from '../../../mocks/userData'
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -93,11 +93,7 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                     <View style={styles.groupsListContainer}>
                         <FlatList
                             data={getGroupsData()}
-                            renderItem={({ item }) => (
-                                <GroupBox
-                                    {...item}
-                                />
-                            )}
+                            renderItem={({ item }) => <GroupBox {...item} />}
                             keyExtractor={(item) => item.title}
                         />
                     </View>
@@ -210,6 +206,6 @@ const styles = StyleSheet.create({
     },
     groupsListContainer: {
         alignSelf: 'stretch',
-        margin: 10,
+        margin: 10
     }
 })

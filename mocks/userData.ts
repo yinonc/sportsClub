@@ -1,5 +1,5 @@
 import { UserData } from '../schemas'
-import {GroupBoxProps} from "../src/components/genericComponents/genericGroupBox";
+import { GroupBoxProps } from '../src/components/genericComponents/genericGroupBox'
 
 export function getMockUserData(): UserData {
     return {
@@ -27,8 +27,7 @@ export function getGroupsData(): GroupBoxProps[] {
         },
         {
             title: 'Ha-Ahukim',
-            imageUri:
-                'https://bootdey.com/img/Content/avatar/avatar1.png',
+            imageUri: 'https://bootdey.com/img/Content/avatar/avatar1.png',
             gameType: 'basketball'
         },
         {
