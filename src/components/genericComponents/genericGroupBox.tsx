@@ -12,14 +12,6 @@ export interface GroupBoxProps {
 
 export default class GroupBox extends React.Component<GroupBoxProps> {
     render() {
-        console.log(
-            '-----------------------------------------------------------------'
-        )
-        console.log(this.props.imageUri)
-        console.log(
-            '-----------------------------------------------------------------'
-        )
-
         return (
             <View style={styles.container}>
                 <View style={styles.groupImageWrapper}>
