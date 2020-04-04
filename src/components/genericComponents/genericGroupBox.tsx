@@ -40,7 +40,9 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 5,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginRight: 10,
+        marginLeft: 10
     },
     groupImageWrapper: {
         flex: 1,

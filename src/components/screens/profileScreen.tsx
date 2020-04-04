@@ -1,10 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
 import { UserData } from '../../../schemas'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
-import GroupBox, { GroupBoxProps } from '../genericComponents/genericGroupBox'
+import GroupBox from '../genericComponents/genericGroupBox'
 import { getGroupsData } from '../../../mocks/userData'
 
 interface ProfileScreenStateProps {
@@ -20,7 +20,7 @@ function calculateAge(date: Date): number {
 class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
     render() {
         return (
-            <View>
+            <View style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.headerContent}>
                         <Image
@@ -90,13 +90,9 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                         />
                         <Text style={styles.groupsHeaderName}>Groups:</Text>
                     </View>
-                    <View style={styles.groupsListContainer}>
-                        <FlatList
-                            data={getGroupsData()}
-                            renderItem={({ item }) => <GroupBox {...item} />}
-                            keyExtractor={(item) => item.title}
-                        />
-                    </View>
+                    <ScrollView style={styles.groupsListContainer}>
+                            {getGroupsData().map(item => <GroupBox {...item} />)}
+                    </ScrollView>
                 </View>
             </View>
         )
@@ -117,7 +113,12 @@ const ProfileScreen = connect(
 export default ProfileScreen
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center'
+    },
     header: {
+        flex: 1,
         paddingTop: 20,
         backgroundColor: '#00BFFF'
     },
@@ -146,6 +147,7 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     body: {
+        flex: 2,
         alignItems: 'center',
         padding: 5,
         flexDirection: 'column'
@@ -205,7 +207,6 @@ const styles = StyleSheet.create({
         color: '#696969'
     },
     groupsListContainer: {
-        alignSelf: 'stretch',
-        margin: 10
+        alignSelf: 'stretch'
     }
 })

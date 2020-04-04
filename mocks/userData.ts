@@ -31,6 +31,12 @@ export function getGroupsData(): GroupBoxProps[] {
             gameType: 'basketball'
         },
         {
+            title: 'Soccer - Friday',
+            imageUri:
+                'https://www.explore-italian-culture.com/images/xitalian-national-soccer-team-01.jpg.pagespeed.ic.Nzizykzi8K.jpg',
+            gameType: 'baseball'
+        },
+        {
             title: 'FC Barcelona',
             imageUri:
                 'https://www.fcbarcelonanoticias.com/uploads/s1/11/95/80/7/foto-de-equipo-del-fc-barcelona-slavia_4_641x361.jpeg',
