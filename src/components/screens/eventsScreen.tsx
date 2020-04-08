@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native'
+import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { Button } from 'react-native-elements'
 import { SportEvent } from '../../../schemas'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 type EventsFilters = 'TIME' | 'DISTANCE' | 'MYGROUPS'
@@ -55,39 +56,51 @@ export default class EventsScreen extends React.Component<
                     <TextInput placeholder="search" />
                     <View style={styles.filters}>
                         <View>
-                            <MaterialCommunityIcons
-                                name="map-marker"
-                                size={20}
-                                color="#FFFFFF"
-                            />
                             <Button
+                                type="clear"
+                                icon={
+                                    <MaterialCommunityIcons
+                                        name="map-marker-distance"
+                                        size={30}
+                                        color="#FFFFFF"
+                                        style={{ alignSelf: 'center' }}
+                                    />
+                                }
                                 title="Distance"
+                                titleStyle={{ color: 'white', fontSize: 15 }}
                                 onPress={this.onDistancePress}
-                                color="black"
                             />
                         </View>
                         <View>
-                            <MaterialCommunityIcons
-                                name="map-marker"
-                                size={20}
-                                color="#FFFFFF"
-                            />
                             <Button
+                                type="clear"
+                                icon={
+                                    <MaterialCommunityIcons
+                                        name="timelapse"
+                                        size={30}
+                                        color="#FFFFFF"
+                                        style={{ alignSelf: 'center' }}
+                                    />
+                                }
                                 title="Time"
+                                titleStyle={{ color: 'white', fontSize: 15 }}
                                 onPress={this.onTimePress}
-                                color="black"
                             />
                         </View>
                         <View>
-                            <MaterialCommunityIcons
-                                name="map-marker"
-                                size={20}
-                                color="#FFFFFF"
-                            />
                             <Button
+                                type="clear"
+                                icon={
+                                    <MaterialCommunityIcons
+                                        name="account-group"
+                                        size={30}
+                                        color="#FFFFFF"
+                                        style={{ alignSelf: 'center' }}
+                                    />
+                                }
                                 title="MyGroups"
+                                titleStyle={{ color: 'white', fontSize: 15 }}
                                 onPress={this.onMyGroupsPress}
-                                color="black"
                             />
                         </View>
                     </View>
