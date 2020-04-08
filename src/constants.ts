@@ -27,6 +27,14 @@ export default {
         GROUPS: {
             name: 'GROUPS',
             symbolName: 'account-group'
+        },
+        LOCATIONS: {
+            name: 'LOCATIONS',
+            symbolName: 'map-marker'
+        },
+        EVENTS: {
+            name: 'EVENTS',
+            symbolName: 'view-list'
         }
     }
 }

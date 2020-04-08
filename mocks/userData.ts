@@ -10,7 +10,7 @@ export function getMockUserData(): UserData {
         dateOfBirth: new Date(1992, 11, 6),
         nickName: 'Leo',
         friends: [],
-        profileImage: 'messi.png',
+        profileImage: 'https://bootdey.com/img/Content/avatar/avatar1.png',
         favoriteGames: ['soccer', 'basketball'],
         rate: 8.7,
         gamesPlayed: 102

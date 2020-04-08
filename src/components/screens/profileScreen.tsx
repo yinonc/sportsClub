@@ -27,7 +27,7 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                             style={styles.avatar}
                             source={{
                                 uri:
-                                    'https://bootdey.com/img/Content/avatar/avatar1.png'
+                                    this.props.userData.profileImage
                             }}
                         />
                         <Text

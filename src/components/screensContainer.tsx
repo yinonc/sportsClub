@@ -4,9 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
 import { Provider, connect } from 'react-redux'
 
-import HomeScreen from './screens/homeScreen'
-import SearchScreen from './screens/searchScreen'
-import GroupsScreen from './screens/groupsScreen'
+import LocationsScreen from './screens/locationsScreen'
+import EventsScreen from './screens/eventsScreen'
 import ProfileScreen from './screens/profileScreen'
 
 import constants from '../constants'
@@ -63,16 +62,12 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
                 }}
             >
                 <Tab.Screen
-                    name={constants.SCREENS.HOME.name}
-                    component={HomeScreen}
+                    name={constants.SCREENS.EVENTS.name}
+                    component={EventsScreen}
                 />
                 <Tab.Screen
-                    name={constants.SCREENS.SEARCH.name}
-                    component={SearchScreen}
-                />
-                <Tab.Screen
-                    name={constants.SCREENS.GROUPS.name}
-                    component={GroupsScreen}
+                    name={constants.SCREENS.LOCATIONS.name}
+                    component={LocationsScreen}
                 />
                 <Tab.Screen
                     name={constants.SCREENS.PROFILE.name}
