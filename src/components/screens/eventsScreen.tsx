@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native'
 import { Button } from 'react-native-elements'
 import { SportEvent } from '../../../schemas'
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 type EventsFilters = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {

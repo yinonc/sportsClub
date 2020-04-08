@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
 import { UserData } from '../../../schemas'
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import GroupBox from '../genericComponents/genericGroupBox'
 import { getGroupsData } from '../../../mocks/userData'
 

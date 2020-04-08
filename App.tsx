@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 

@@ -25,7 +25,7 @@ $ npm start
 We're working with open source library for icons.
 Usage:
 ```javascript
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 <MaterialCommunityIcons
     name="Home"

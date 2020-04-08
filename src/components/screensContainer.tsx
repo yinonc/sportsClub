@@ -1,7 +1,7 @@
 import 'react-native-gesture-handler'
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Provider, connect } from 'react-redux'
 
 import LocationsScreen from './screens/locationsScreen'

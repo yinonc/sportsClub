@@ -1,7 +1,7 @@
 import { GameType } from '../../../schemas'
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
-import { MaterialCommunityIcons } from 'react-native-vector-icons'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 export interface GroupBoxProps {
     title: string
