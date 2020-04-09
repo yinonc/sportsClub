@@ -88,8 +88,10 @@ export default class EventsScreen extends React.Component<
                         inputContainerStyle={styles.searchBarInputStyle}
                     />
                     <View style={styles.filters}>
-                        {filtersData.map(filterData => {
-                            const itemInFilters = this.state.filters.includes(filterData.filterName);
+                        {filtersData.map((filterData) => {
+                            const itemInFilters = this.state.filters.includes(
+                                filterData.filterName
+                            )
                             return (
                                 <View key={filterData.text}>
                                     <TouchableHighlight
@@ -106,10 +108,20 @@ export default class EventsScreen extends React.Component<
                                             <MaterialCommunityIcons
                                                 name={filterData.icon}
                                                 size={30}
-                                                color={itemInFilters? 'gray' :"#FFFFFF"}
+                                                color={
+                                                    itemInFilters
+                                                        ? 'gray'
+                                                        : '#FFFFFF'
+                                                }
                                                 style={{ alignSelf: 'center' }}
                                             />
-                                            <Text style={itemInFilters? styles.filterTextGray : styles.filterText}>
+                                            <Text
+                                                style={
+                                                    itemInFilters
+                                                        ? styles.filterTextGray
+                                                        : styles.filterText
+                                                }
+                                            >
                                                 {filterData.text}
                                             </Text>
                                         </View>
