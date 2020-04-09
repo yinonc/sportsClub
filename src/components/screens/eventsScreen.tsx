@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import {StyleSheet, Text, View, TouchableHighlight, ScrollView} from 'react-native'
 import { SearchBar } from 'react-native-elements'
 import { SportEvent } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import {getMockEvents} from "../../../mocks/events";
+import GroupBox from "../genericComponents/genericGroupBox";
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
@@ -12,6 +14,7 @@ interface EventsScreenProps {
 interface EventsScreenState {
     filters: EventsFilter[]
     searchText: string
+    events: SportEvent[]
 }
 
 interface FilterData {
@@ -44,7 +47,14 @@ export default class EventsScreen extends React.Component<
 > {
     state = {
         filters: [],
-        searchText: ''
+        searchText: '',
+        events: []
+    }
+
+    componentDidMount(): void {
+        this.setState({
+            events: getMockEvents()
+        })
     }
 
     onFilterPress = (filterName: EventsFilter) => {
@@ -131,7 +141,13 @@ export default class EventsScreen extends React.Component<
                         })}
                     </View>
                 </View>
-                <View style={styles.content}></View>
+                <View style={styles.content}>
+                    <ScrollView style={styles.eventsListContainer}>
+                        {this.state.events.map(event => (
+                            <GroupBox key={event.title} {...event} />
+                        ))}
+                    </ScrollView>
+                </View>
             </View>
         )
     }
@@ -180,5 +196,8 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 6
+    },
+    eventsListContainer: {
+
     }
 })

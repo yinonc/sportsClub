@@ -2,7 +2,7 @@ export type GameType =
     | 'soccer'
     | 'basketball'
     | 'tennis'
-    | 'running'
+    | 'run'
     | 'cycling'
     | 'baseball'
 
@@ -38,7 +38,9 @@ export interface Group {
 
 export interface SportEvent {
     userIds: UserData['id'][]
-    game: Game
+    // game: Game
+    gameType: GameType
+    title: string
     maxUsers: number
     location: string // Google place id / something else ?
     date: Date
