@@ -1,11 +1,6 @@
 import React from 'react'
-import {
-    StyleSheet,
-    Text,
-    View,
-    TouchableHighlight
-} from 'react-native'
-import { SearchBar } from 'react-native-elements';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
+import { SearchBar } from 'react-native-elements'
 import { SportEvent } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
@@ -15,14 +10,14 @@ interface EventsScreenProps {
 }
 
 interface EventsScreenState {
-    filters: EventsFilter[];
-    searchText: string;
+    filters: EventsFilter[]
+    searchText: string
 }
 
 interface FilterData {
     text: string
     icon: string
-    filterName: EventsFilter;
+    filterName: EventsFilter
 }
 
 const filtersData: FilterData[] = [
@@ -104,7 +99,9 @@ export default class EventsScreen extends React.Component<
                                             color="#FFFFFF"
                                             style={{ alignSelf: 'center' }}
                                         />
-                                        <Text style={styles.filterText}>{filterData.text}</Text>
+                                        <Text style={styles.filterText}>
+                                            {filterData.text}
+                                        </Text>
                                     </View>
                                 </TouchableHighlight>
                             </View>
@@ -156,5 +153,5 @@ const styles = StyleSheet.create({
     },
     content: {
         flex: 6
-    },
+    }
 })
