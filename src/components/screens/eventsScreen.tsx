@@ -48,9 +48,14 @@ export default class EventsScreen extends React.Component<
     }
 
     onFilterPress = (filterName: EventsFilter) => {
-        if (!this.state.filters.includes(filterName)) {
+        const { filters } = this.state
+        const filterIndex = filters.indexOf(filterName)
+        if (filterIndex > -1) {
+            filters.splice(filterIndex, 1)
+            this.setState({ filters })
+        } else {
             this.setState({
-                filters: [...this.state.filters, filterName]
+                filters: [...filters, filterName]
             })
         }
     }
@@ -83,29 +88,35 @@ export default class EventsScreen extends React.Component<
                         inputContainerStyle={styles.searchBarInputStyle}
                     />
                     <View style={styles.filters}>
-                        {filtersData.map((filterData) => (
-                            <View key={filterData.text}>
-                                <TouchableHighlight
-                                    onPress={() =>
-                                        this.onFilterPress(
-                                            filterData.filterName
-                                        )
-                                    }
-                                >
-                                    <View>
-                                        <MaterialCommunityIcons
-                                            name={filterData.icon}
-                                            size={30}
-                                            color="#FFFFFF"
-                                            style={{ alignSelf: 'center' }}
-                                        />
-                                        <Text style={styles.filterText}>
-                                            {filterData.text}
-                                        </Text>
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                        ))}
+                        {filtersData.map(filterData => {
+                            const itemInFilters = this.state.filters.includes(filterData.filterName);
+                            return (
+                                <View key={filterData.text}>
+                                    <TouchableHighlight
+                                        style={styles.filter}
+                                        activeOpacity={0.6}
+                                        underlayColor="transparent"
+                                        onPress={() =>
+                                            this.onFilterPress(
+                                                filterData.filterName
+                                            )
+                                        }
+                                    >
+                                        <View>
+                                            <MaterialCommunityIcons
+                                                name={filterData.icon}
+                                                size={30}
+                                                color={itemInFilters? 'gray' :"#FFFFFF"}
+                                                style={{ alignSelf: 'center' }}
+                                            />
+                                            <Text style={itemInFilters? styles.filterTextGray : styles.filterText}>
+                                                {filterData.text}
+                                            </Text>
+                                        </View>
+                                    </TouchableHighlight>
+                                </View>
+                            )
+                        })}
                     </View>
                 </View>
                 <View style={styles.content}></View>
@@ -148,8 +159,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         marginTop: 10
     },
+    filter: {},
     filterText: {
         color: 'white'
+    },
+    filterTextGray: {
+        color: 'gray'
     },
     content: {
         flex: 6
