@@ -1,108 +1,114 @@
 import React from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
-import { Button } from 'react-native-elements'
+import {
+    StyleSheet,
+    Text,
+    View,
+    TouchableHighlight
+} from 'react-native'
+import { SearchBar } from 'react-native-elements';
 import { SportEvent } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-type EventsFilters = 'TIME' | 'DISTANCE' | 'MYGROUPS'
+type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
     events?: SportEvent[]
 }
 
 interface EventsScreenState {
-    filters: EventsFilters[]
+    filters: EventsFilter[];
+    searchText: string;
 }
+
+interface FilterData {
+    text: string
+    icon: string
+    filterName: EventsFilter;
+}
+
+const filtersData: FilterData[] = [
+    {
+        text: 'Distance',
+        icon: 'map-marker-distance',
+        filterName: 'DISTANCE'
+    },
+    {
+        text: 'Time',
+        icon: 'timelapse',
+        filterName: 'TIME'
+    },
+    {
+        text: 'My Groups',
+        icon: 'account-group',
+        filterName: 'MYGROUPS'
+    }
+]
 
 export default class EventsScreen extends React.Component<
     EventsScreenProps,
     EventsScreenState
 > {
     state = {
-        filters: []
+        filters: [],
+        searchText: ''
     }
 
-    onDistancePress = () => {
-        console.log('Pressed')
-        if (!this.state.filters.includes('DISTANCE')) {
+    onFilterPress = (filterName: EventsFilter) => {
+        if (!this.state.filters.includes(filterName)) {
             this.setState({
-                filters: [...this.state.filters, 'DISTANCE']
+                filters: [...this.state.filters, filterName]
             })
         }
     }
 
-    onTimePress = () => {
-        console.log('Pressed')
-        if (!this.state.filters.includes('TIME')) {
-            this.setState({
-                filters: [...this.state.filters, 'TIME']
-            })
-        }
+    updateSearch = (text: string) => {
+        this.setState({
+            searchText: text
+        })
     }
 
-    onMyGroupsPress = () => {
-        console.log('Pressed')
-        if (!this.state.filters.includes('MYGROUPS')) {
-            this.setState({
-                filters: [...this.state.filters, 'MYGROUPS']
-            })
-        }
+    onClearSearch = () => {
+        this.setState({
+            searchText: ''
+        })
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text>Events</Text>
-                    <TextInput placeholder="search" />
+                    <Text style={styles.headerText}>Events</Text>
+                    <SearchBar
+                        placeholder="Search"
+                        onChangeText={this.updateSearch}
+                        value={this.state.searchText}
+                        onClear={this.onClearSearch}
+                        lightTheme={true}
+                        round={true}
+                        containerStyle={styles.searchBarContainerStyle}
+                        inputContainerStyle={styles.searchBarInputStyle}
+                    />
                     <View style={styles.filters}>
-                        <View>
-                            <Button
-                                type="clear"
-                                icon={
-                                    <MaterialCommunityIcons
-                                        name="map-marker-distance"
-                                        size={30}
-                                        color="#FFFFFF"
-                                        style={{ alignSelf: 'center' }}
-                                    />
-                                }
-                                title="Distance"
-                                titleStyle={{ color: 'white', fontSize: 15 }}
-                                onPress={this.onDistancePress}
-                            />
-                        </View>
-                        <View>
-                            <Button
-                                type="clear"
-                                icon={
-                                    <MaterialCommunityIcons
-                                        name="timelapse"
-                                        size={30}
-                                        color="#FFFFFF"
-                                        style={{ alignSelf: 'center' }}
-                                    />
-                                }
-                                title="Time"
-                                titleStyle={{ color: 'white', fontSize: 15 }}
-                                onPress={this.onTimePress}
-                            />
-                        </View>
-                        <View>
-                            <Button
-                                type="clear"
-                                icon={
-                                    <MaterialCommunityIcons
-                                        name="account-group"
-                                        size={30}
-                                        color="#FFFFFF"
-                                        style={{ alignSelf: 'center' }}
-                                    />
-                                }
-                                title="MyGroups"
-                                titleStyle={{ color: 'white', fontSize: 15 }}
-                                onPress={this.onMyGroupsPress}
-                            />
-                        </View>
+                        {filtersData.map((filterData) => (
+                            <View key={filterData.text}>
+                                <TouchableHighlight
+                                    onPress={() =>
+                                        this.onFilterPress(
+                                            filterData.filterName
+                                        )
+                                    }
+                                >
+                                    <View>
+                                        <MaterialCommunityIcons
+                                            name={filterData.icon}
+                                            size={30}
+                                            color="#FFFFFF"
+                                            style={{ alignSelf: 'center' }}
+                                        />
+                                        <Text style={styles.filterText}>{filterData.text}</Text>
+                                    </View>
+                                </TouchableHighlight>
+                            </View>
+                        ))}
                     </View>
                 </View>
                 <View style={styles.content}></View>
@@ -117,18 +123,38 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     header: {
+        paddingTop: 20,
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#00BFFF'
     },
-    content: {
-        flex: 6
+    headerText: {
+        color: 'white',
+        fontSize: 20
+    },
+    searchBarContainerStyle: {
+        backgroundColor: 'transparent',
+        borderTopColor: 'transparent',
+        borderBottomColor: 'transparent',
+        justifyContent: 'space-around',
+        alignSelf: 'stretch',
+        marginLeft: 30,
+        marginRight: 30
+    },
+    searchBarInputStyle: {
+        backgroundColor: 'white'
     },
     filters: {
         flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'space-around',
         marginTop: 10
-    }
+    },
+    filterText: {
+        color: 'white'
+    },
+    content: {
+        flex: 6
+    },
 })
