@@ -1,7 +1,10 @@
-import { SportEvent } from '../../../schemas'
+import { SportEvent, UserData } from '../../../schemas'
 import React from 'react'
-import { StyleSheet, Text, TouchableHighlight, View } from 'react-native'
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { ParticipantsView } from './genericParticipantsBox'
+import Popover from 'react-native-popover-view'
+import ParticipantsBox from '../genericComponents/genericParticipantsBox'
 
 function datesDiff(date1: Date, dateNow: number) {
     const diffMs = date1.getTime() - dateNow
@@ -13,65 +16,107 @@ function datesDiff(date1: Date, dateNow: number) {
 
 interface EventBoxProps extends SportEvent {
     onItemClick(): void
+    getParticipantsData(userIds: UserData['id'][]): ParticipantsView[]
 }
 
 export default class EventBox extends React.Component<EventBoxProps> {
+    touchable = null
+    state = {
+        showTooltip: false,
+        boxLayout: {
+            width: 200
+        }
+    }
+
+    openPopover = () => {
+        this.setState({ showTooltip: true })
+    }
+
+    closePopover() {
+        this.setState({ showTooltip: false })
+    }
+
     render() {
         const currentDate = Date.now()
         return (
-            <TouchableHighlight
-                activeOpacity={0.6}
-                underlayColor="transparent"
-                onPress={this.props.onItemClick}
-            >
-                <View style={styles.container}>
-                    <MaterialCommunityIcons
-                        style={styles.gameTypeIcon}
-                        name={this.props.gameType}
-                        size={30}
-                        color="black"
-                    />
-                    <View style={styles.info}>
-                        <View style={styles.infoTop}>
-                            <View>
-                                <Text style={styles.title}>
-                                    {this.props.title}
-                                </Text>
-                            </View>
-                            <View>
-                                <Text style={styles.title}>{`in: ${datesDiff(
-                                    this.props.date,
-                                    currentDate
-                                )}`}</Text>
-                            </View>
-                        </View>
-                        <View style={styles.infoBottom}>
-                            <View style={styles.locationContainer}>
-                                <MaterialCommunityIcons
-                                    style={styles.marker}
-                                    name="map-marker"
-                                    size={15}
-                                    color="black"
-                                />
-                                <Text>{this.props.location}</Text>
-                            </View>
-                            <View>
-                                <Text
-                                    style={styles.title}
-                                >{`Approved: ${this.props.userIds.length}/${this.props.maxUsers}`}</Text>
-                            </View>
-                        </View>
-                    </View>
-                    <View style={styles.arrow}>
+            <View>
+                <TouchableHighlight
+                    ref={(ref) => (this.touchable = ref)}
+                    activeOpacity={0.6}
+                    underlayColor="transparent"
+                    onPress={() => {
+                        this.openPopover()
+                        this.props.onItemClick()
+                    }}
+                >
+                    <View
+                        style={styles.container}
+                        onLayout={(event) => {
+                            this.setState({
+                                boxLayout: event.nativeEvent.layout
+                            })
+                        }}
+                    >
                         <MaterialCommunityIcons
                             style={styles.gameTypeIcon}
-                            name="subdirectory-arrow-right"
+                            name={this.props.gameType}
                             size={30}
-                            color="gray"
+                            color="black"
                         />
+                        <View style={styles.info}>
+                            <View style={styles.infoLeft}>
+                                <View>
+                                    <Text style={styles.title}>
+                                        {this.props.title}
+                                    </Text>
+                                </View>
+                                <View style={styles.locationContainer}>
+                                    <MaterialCommunityIcons
+                                        style={styles.marker}
+                                        name="map-marker"
+                                        size={15}
+                                        color="black"
+                                    />
+                                    <Text>{this.props.location}</Text>
+                                </View>
+                            </View>
+                            <View style={styles.infoRight}>
+                                <View>
+                                    <Text style={styles.time}>{`in: ${datesDiff(
+                                        this.props.date,
+                                        currentDate
+                                    )}`}</Text>
+                                </View>
+                                <View>
+                                    <Text
+                                        style={styles.approve}
+                                    >{`Approved: ${this.props.userIds.length}/${this.props.maxUsers}`}</Text>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={styles.arrow}>
+                            <MaterialCommunityIcons
+                                style={styles.gameTypeIcon}
+                                name="subdirectory-arrow-right"
+                                size={30}
+                                color="gray"
+                            />
+                        </View>
                     </View>
-                </View>
-            </TouchableHighlight>
+                </TouchableHighlight>
+                <Popover
+                    isVisible={this.state.showTooltip}
+                    fromView={this.touchable}
+                    onRequestClose={() => this.closePopover()}
+                >
+                    <ParticipantsBox
+                        width={this.state.boxLayout.width}
+                        participants={this.props.getParticipantsData(
+                            this.props.userIds
+                        )}
+                    />
+                </Popover>
+            </View>
         )
     }
 }
@@ -84,6 +129,7 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 5,
         flexDirection: 'row',
+        height: 56,
         alignItems: 'center',
         marginRight: 10,
         marginLeft: 10
@@ -92,23 +138,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     info: {
-        paddingLeft: 6,
-        paddingRight: 6,
+        maxHeight: 40,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
         flex: 6
     },
-    infoTop: {
-        marginBottom: 6,
-        flexDirection: 'row',
+    infoLeft: {
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
-    infoBottom: {
-        flexDirection: 'row',
+    infoRight: {
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-around'
     },
     title: {
-        flex: 5
+        marginBottom: 5
     },
     marker: {},
     gameTypeIcon: {
@@ -118,5 +165,10 @@ const styles = StyleSheet.create({
     },
     arrow: {
         flex: 1
+    },
+    popover: {},
+    approve: {},
+    time: {
+        marginBottom: 5
     }
 })

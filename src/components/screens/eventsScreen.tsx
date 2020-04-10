@@ -7,10 +7,11 @@ import {
     ScrollView
 } from 'react-native'
 import { SearchBar } from 'react-native-elements'
-import { SportEvent } from '../../../schemas'
+import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getMockEvents } from '../../../mocks/events'
-import GroupBox from '../genericComponents/genericEventBox'
+import EventBox from '../genericComponents/genericEventBox'
+import { ParticipantsView } from '../genericComponents/genericParticipantsBox'
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
@@ -88,9 +89,28 @@ export default class EventsScreen extends React.Component<
         })
     }
 
+    getParticipantsData = (userIds: UserData['id'][]): ParticipantsView[] => {
+        return [
+            {
+                image:
+                    'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
+                rate: 8.7,
+                userId: '1',
+                name: 'Yinon'
+            },
+            {
+                image:
+                    'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
+                rate: 8.7,
+                userId: '2',
+                name: 'Yinon'
+            }
+        ]
+    }
+
     onItemClick = (sportEvent: SportEvent) => {
-        console.log('sportEvent clicked:')
-        console.log(sportEvent)
+        // console.log('sportEvent clicked:')
+        // console.log(sportEvent)
     }
 
     render() {
@@ -155,9 +175,10 @@ export default class EventsScreen extends React.Component<
                 <View style={styles.content}>
                     <ScrollView style={styles.eventsListContainer}>
                         {this.state.events.map((sportEvent) => (
-                            <GroupBox
+                            <EventBox
+                                getParticipantsData={this.getParticipantsData}
                                 onItemClick={() => this.onItemClick(sportEvent)}
-                                key={sportEvent.title}
+                                key={sportEvent.eventId}
                                 {...sportEvent}
                             />
                         ))}
