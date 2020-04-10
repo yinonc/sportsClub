@@ -2,7 +2,6 @@ import { SportEvent, UserData } from '../../../schemas'
 import React from 'react'
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { ParticipantsView } from './genericParticipantsBox'
 import Popover from 'react-native-popover-view'
 import ParticipantsBox from '../genericComponents/genericParticipantsBox'
 
@@ -16,7 +15,7 @@ function datesDiff(date1: Date, dateNow: number) {
 
 interface EventBoxProps extends SportEvent {
     onItemClick(): void
-    getParticipantsData(userIds: UserData['id'][]): ParticipantsView[]
+    getParticipantsData(userIds: UserData['id'][]): UserData[]
 }
 
 export default class EventBox extends React.Component<EventBoxProps> {
@@ -29,7 +28,9 @@ export default class EventBox extends React.Component<EventBoxProps> {
     }
 
     openPopover = () => {
-        this.setState({ showTooltip: true })
+        if (this.props.userIds.length > 0) {
+            this.setState({ showTooltip: true })
+        }
     }
 
     closePopover() {
@@ -44,10 +45,8 @@ export default class EventBox extends React.Component<EventBoxProps> {
                     ref={(ref) => (this.touchable = ref)}
                     activeOpacity={0.6}
                     underlayColor="transparent"
-                    onPress={() => {
-                        this.openPopover()
-                        this.props.onItemClick()
-                    }}
+                    onLongPress={this.openPopover}
+                    onPress={this.props.onItemClick}
                 >
                     <View
                         style={styles.container}

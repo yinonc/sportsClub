@@ -2,33 +2,44 @@ import { UserData } from '../../../schemas'
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
 
-export interface ParticipantsView {
-    userId: UserData['id']
-    image?: UserData['profileImage']
-    rate: UserData['rate']
-    name: string
+export interface ParticipantsBoxProps {
+    participants: UserData[]
+    width: number
 }
 
-export interface ParticipantsBoxProps {
-    participants: ParticipantsView[]
-    width: number
+const POPOVER_HEIGHT_BY_PARTICIPANTS_COUNT = {
+    1: 48,
+    2: 98,
+    3: 146,
+    4: 160
 }
 
 export default class ParticipantsBox extends React.Component<
     ParticipantsBoxProps
 > {
+    resolvePopoverHeight = () => {
+        const participantsCount = this.props.participants.length
+        if (POPOVER_HEIGHT_BY_PARTICIPANTS_COUNT[participantsCount]) {
+            return POPOVER_HEIGHT_BY_PARTICIPANTS_COUNT[participantsCount]
+        }
+        return POPOVER_HEIGHT_BY_PARTICIPANTS_COUNT[4]
+    }
+
     render() {
         return (
             <View
                 style={Object.assign(
-                    { width: this.props.width },
+                    {
+                        width: this.props.width - 40,
+                        height: this.resolvePopoverHeight()
+                    },
                     styles.container
                 )}
             >
-                <ScrollView>
+                <ScrollView style={{ height: 100 }}>
                     {this.props.participants.map((participant, index) => (
                         <View
-                            key={participant.userId}
+                            key={participant.id}
                             style={Object.assign(
                                 {
                                     borderBottomWidth:
@@ -42,13 +53,13 @@ export default class ParticipantsBox extends React.Component<
                         >
                             <View style={styles.participantImageWrapper}>
                                 <Image
-                                    source={{ uri: participant.image }}
+                                    source={{ uri: participant.profileImage }}
                                     style={styles.participantImage}
                                 />
                             </View>
                             <View style={styles.participantNameWrapper}>
                                 <Text style={styles.participantName}>
-                                    {participant.name}
+                                    {`${participant.firstName} ${participant.lastName}`}
                                 </Text>
                             </View>
                             <View style={styles.participantRateWrapper}>
@@ -66,39 +77,38 @@ export default class ParticipantsBox extends React.Component<
 
 const styles = StyleSheet.create({
     container: {
-        alignSelf: 'stretch',
-        flex: 1,
-        flexDirection: 'column'
+        flex: 1
     },
     participantContainer: {
-        justifyContent: 'space-between',
-        alignSelf: 'stretch',
-        height: 35,
-        borderColor: 'white',
+        justifyContent: 'space-around',
+        // borderColor: 'black',
+        padding: 5,
+        flex: 1,
         alignItems: 'center',
         flexDirection: 'row'
     },
     participantImageWrapper: {
-        flex: 1
+        paddingLeft: 10,
+        flex: 2
     },
     participantImage: {
-        width: 30,
-        height: 30,
+        width: 38,
+        height: 38,
         borderRadius: 63,
         borderWidth: 2,
         borderColor: 'white'
     },
     participantNameWrapper: {
-        flex: 4
+        flex: 5
     },
     participantName: {
-        color: 'white'
+        color: 'black'
     },
     participantRateWrapper: {
         flex: 2,
         marginRight: 5
     },
     participantRate: {
-        color: 'white'
+        color: 'black'
     }
 })

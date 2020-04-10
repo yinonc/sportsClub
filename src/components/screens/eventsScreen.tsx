@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React from 'react'
 import {
     StyleSheet,
@@ -11,7 +12,7 @@ import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getMockEvents } from '../../../mocks/events'
 import EventBox from '../genericComponents/genericEventBox'
-import { ParticipantsView } from '../genericComponents/genericParticipantsBox'
+import { getAllMockUsers } from '../../../mocks/userData'
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
@@ -89,23 +90,9 @@ export default class EventsScreen extends React.Component<
         })
     }
 
-    getParticipantsData = (userIds: UserData['id'][]): ParticipantsView[] => {
-        return [
-            {
-                image:
-                    'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
-                rate: 8.7,
-                userId: '1',
-                name: 'Yinon'
-            },
-            {
-                image:
-                    'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
-                rate: 8.7,
-                userId: '2',
-                name: 'Yinon'
-            }
-        ]
+    getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
+        const usersDataMap = _.keyBy(getAllMockUsers(), 'id')
+        return userIds.map((id) => usersDataMap[id])
     }
 
     onItemClick = (sportEvent: SportEvent) => {
