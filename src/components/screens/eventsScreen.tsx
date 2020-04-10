@@ -154,8 +154,12 @@ export default class EventsScreen extends React.Component<
                 </View>
                 <View style={styles.content}>
                     <ScrollView style={styles.eventsListContainer}>
-                        {this.state.events.map(sportEvent => (
-                            <GroupBox onItemClick={() => this.onItemClick(sportEvent)} key={sportEvent.title} {...sportEvent} />
+                        {this.state.events.map((sportEvent) => (
+                            <GroupBox
+                                onItemClick={() => this.onItemClick(sportEvent)}
+                                key={sportEvent.title}
+                                {...sportEvent}
+                            />
                         ))}
                     </ScrollView>
                 </View>
