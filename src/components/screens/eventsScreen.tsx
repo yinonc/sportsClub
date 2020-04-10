@@ -10,7 +10,7 @@ import { SearchBar } from 'react-native-elements'
 import { SportEvent } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getMockEvents } from '../../../mocks/events'
-import GroupBox from '../genericComponents/genericGroupBox'
+import GroupBox from '../genericComponents/genericEventBox'
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
@@ -88,6 +88,11 @@ export default class EventsScreen extends React.Component<
         })
     }
 
+    onItemClick = (sportEvent: SportEvent) => {
+        console.log('sportEvent clicked:')
+        console.log(sportEvent)
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -149,8 +154,8 @@ export default class EventsScreen extends React.Component<
                 </View>
                 <View style={styles.content}>
                     <ScrollView style={styles.eventsListContainer}>
-                        {this.state.events.map((event) => (
-                            <GroupBox key={event.title} {...event} />
+                        {this.state.events.map(sportEvent => (
+                            <GroupBox onItemClick={() => this.onItemClick(sportEvent)} key={sportEvent.title} {...sportEvent} />
                         ))}
                     </ScrollView>
                 </View>

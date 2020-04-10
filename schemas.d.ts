@@ -37,6 +37,7 @@ export interface Group {
 }
 
 export interface SportEvent {
+    eventId: string
     userIds: UserData['id'][]
     // game: Game
     gameType: GameType
