@@ -33,14 +33,29 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
                 <Stack.Screen
                     name={constants.SCREENS.WELCOME.name}
                     component={WelcomeScreen}
+                    // options={{
+                    //     headerStyle: {
+                    //         backgroundColor: '#00bfff'
+                    //     }
+                    // }}
                 />
                 <Stack.Screen
                     name={constants.SCREENS.LOGIN.name}
                     component={LoginScreen}
+                    // options={{
+                    //     headerStyle: {
+                    //         backgroundColor: '#00bfff'
+                    //     }
+                    // }}
                 />
                 <Stack.Screen
                     name={constants.SCREENS.REGISTER.name}
                     component={RegisterScreen}
+                    // options={{
+                    //     headerStyle: {
+                    //         backgroundColor: '#00bfff'
+                    //     }
+                    // }}
                 />
             </Stack.Navigator>
         ) : (
