@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { Input } from 'react-native-elements'
+import { Input, CheckBox } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
 
-function formatDate() {
+function formatDate(): string {
     let d = new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -15,12 +15,20 @@ function formatDate() {
     return [year, month, day].join('-')
 }
 
-export default class RegisterScreen extends React.Component {
+interface RegisterScreenProps {}
+
+interface RegisterScreenState {
+    date: string
+    termsChecked: boolean
+}
+
+export default class RegisterScreen extends React.Component<
+    RegisterScreenProps,
+    RegisterScreenState
+> {
     state = {
-        date: formatDate()
-    }
-    onChangeText = () => {
-        console.log('onChangeText called')
+        date: formatDate(),
+        termsChecked: false
     }
     handleRegister = () => {}
 
@@ -53,35 +61,60 @@ export default class RegisterScreen extends React.Component {
                         placeholder="Email"
                         label="Email"
                     />
-                    <DatePicker
-                        style={styles.datePicker}
-                        date={this.state.date}
-                        mode="date"
-                        placeholder="select date"
-                        format="YYYY-MM-DD"
-                        minDate="1900-01-01"
-                        maxDate={this.state.date}
-                        confirmBtnText="Confirm"
-                        cancelBtnText="Cancel"
-                        customStyles={{
-                            dateIcon: {
-                                position: 'absolute',
-                                left: 0,
-                                top: 4,
-                                marginLeft: 0
-                            },
-                            dateInput: {
-                                marginLeft: 36
-                            }
-                        }}
-                        onDateChange={(date) => {
-                            this.setState({ date: date })
-                        }}
+                    <View style={styles.datePickerWrapper}>
+                        <Text style={styles.datePickerText}>
+                            Date of Birth:
+                        </Text>
+                        <DatePicker
+                            style={styles.datePicker}
+                            date={this.state.date}
+                            mode="date"
+                            placeholder="select date"
+                            format="YYYY-MM-DD"
+                            minDate="1900-01-01"
+                            maxDate={this.state.date}
+                            confirmBtnText="Confirm"
+                            cancelBtnText="Cancel"
+                            customStyles={{
+                                dateIcon: {
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 4,
+                                    marginLeft: 0
+                                },
+                                dateInput: {
+                                    marginLeft: 36
+                                }
+                            }}
+                            onDateChange={(date) => {
+                                this.setState({ date: date })
+                            }}
+                        />
+                    </View>
+                    <CheckBox
+                        containerStyle={styles.checkBoxStyle}
+                        title="I agree to the Terms and Conditions."
+                        checked={this.state.termsChecked}
+                        onPress={() =>
+                            this.setState({
+                                termsChecked: !this.state.termsChecked
+                            })
+                        }
                     />
                 </View>
                 <View style={styles.contentRegisterButton}>
-                    <TouchableOpacity onPress={this.handleRegister}>
-                        <View style={styles.registerButton}>
+                    <TouchableOpacity
+                        disabled={!this.state.termsChecked}
+                        onPress={this.handleRegister}
+                    >
+                        <View
+                            style={[
+                                styles.registerButton,
+                                this.state.termsChecked
+                                    ? {}
+                                    : styles.registerButtonDisabled
+                            ]}
+                        >
                             <Text style={styles.registerText}>Register</Text>
                         </View>
                     </TouchableOpacity>
@@ -101,7 +134,9 @@ const styles = StyleSheet.create({
     },
     registerForm: {
         alignSelf: 'stretch',
-        flex: 6
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flex: 8
     },
     contentRegisterButton: {
         alignSelf: 'stretch',
@@ -117,16 +152,34 @@ const styles = StyleSheet.create({
         height: 36,
         borderRadius: 63
     },
+    registerButtonDisabled: {
+        backgroundColor: 'gray'
+    },
     registerText: {
         color: 'white'
     },
-    generalInput: {
-        marginBottom: 20
-    },
+    generalInput: {},
     inputIcon: {
         marginRight: 10
     },
+    datePickerWrapper: {
+        alignItems: 'center',
+        alignSelf: 'stretch',
+        justifyContent: 'space-between',
+        marginLeft: 10,
+        marginRight: 10,
+        flexDirection: 'row'
+    },
     datePicker: {
         width: 160
+    },
+    datePickerText: {
+        color: 'gray',
+        fontWeight: 'bold'
+    },
+    checkBoxStyle: {
+        marginTop: 10,
+        backgroundColor: 'white',
+        borderWidth: 0
     }
 })

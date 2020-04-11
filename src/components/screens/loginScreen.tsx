@@ -23,18 +23,13 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         super(props)
     }
 
-    static navigationOptions = {
-        headerMode: null
-    }
-    handleLoginPress() {
+    handleMockLogin() {
         getUserData().then((userData) => {
             this.props.setUserData(userData)
         })
     }
 
-    handleLogin() {
-        // const user =
-    }
+    handleLogin = () => {}
 
     handleGoToRegister = () => {
         this.props.navigation.navigate(constants.SCREENS.REGISTER.name)
@@ -103,8 +98,8 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                         </View>
                     </TouchableOpacity>
                     <Button
-                        onPress={this.handleLoginPress.bind(this)}
-                        title="Click here mocked login"
+                        onPress={this.handleMockLogin.bind(this)}
+                        title="Click here to mock login"
                     />
                 </View>
             </View>
