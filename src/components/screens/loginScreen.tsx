@@ -18,11 +18,8 @@ const getUserData = async (): Promise<UserData> => {
 }
 
 class LoginScreenPure extends React.Component<LoginScreenProps> {
-
-    constructor(props){
+    constructor(props) {
         super(props)
-
-
     }
 
     handleLoginPress() {
@@ -36,7 +33,7 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
     }
 
     handleForgotPassword = () => {
-        console.log("forgot password")
+        console.log('forgot password')
     }
 
     render() {
@@ -76,10 +73,11 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                         }
                     />
                     <View style={styles.forgotPassword}>
-                        <TouchableOpacity style={{ }} onPress={this.handleForgotPassword} >
-                            <Text>
-                                Forgot Password?
-                            </Text>
+                        <TouchableOpacity
+                            style={{}}
+                            onPress={this.handleForgotPassword}
+                        >
+                            <Text>Forgot Password?</Text>
                         </TouchableOpacity>
                     </View>
                     <Button
