@@ -35,6 +35,10 @@ export default {
         EVENTS: {
             name: 'EVENTS',
             symbolName: 'view-list'
+        },
+        EVENT: {
+            name: 'EVENT',
+            symbolName: 'view-list'
         }
     }
 }

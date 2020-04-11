@@ -91,7 +91,7 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                     </View>
                     <ScrollView style={styles.groupsListContainer}>
                         {getGroupsData().map((item) => (
-                            <GroupBox key={item.title} {...item} />
+                            <GroupBox key={item.id} {...item} />
                         ))}
                     </ScrollView>
                 </View>

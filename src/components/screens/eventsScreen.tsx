@@ -13,10 +13,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { getMockEvents } from '../../../mocks/events'
 import EventBox from '../genericComponents/genericEventBox'
 import { getAllMockUsers } from '../../../mocks/userData'
+import constants from '../../constants'
 type EventsFilter = 'TIME' | 'DISTANCE' | 'MYGROUPS'
 
 interface EventsScreenProps {
     events?: SportEvent[]
+    navigation: any
 }
 
 interface EventsScreenState {
@@ -96,8 +98,9 @@ export default class EventsScreen extends React.Component<
     }
 
     onItemClick = (sportEvent: SportEvent) => {
-        // console.log('sportEvent clicked:')
-        // console.log(sportEvent)
+        this.props.navigation.navigate(constants.SCREENS.EVENT.name, {
+            sportEvent
+        })
     }
 
     render() {

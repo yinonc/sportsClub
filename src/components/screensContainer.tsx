@@ -7,11 +7,12 @@ import { Provider, connect } from 'react-redux'
 import LocationsScreen from './screens/locationsScreen'
 import EventsScreen from './screens/eventsScreen'
 import ProfileScreen from './screens/profileScreen'
+import EventScreen from './screens/eventScreen'
+import RegisterScreen from './screens/registerScreen'
+import LoginScreen from './screens/loginScreen'
 
 import constants from '../constants'
 import { AppState } from '../appState/appInitialState'
-import LoginScreen from './screens/loginScreen'
-import RegisterScreen from './screens/registerScreen'
 import { createStackNavigator } from '@react-navigation/stack'
 
 const Stack = createStackNavigator()
@@ -19,6 +20,24 @@ const Tab = createBottomTabNavigator()
 
 interface ScreensContainerStateProps {
     isUserLoggedIn: boolean
+}
+
+const EventsScreensStack = createStackNavigator()
+
+function EventsStackScreen() {
+    return (
+        <EventsScreensStack.Navigator>
+            <EventsScreensStack.Screen
+                name={constants.SCREENS.EVENTS.name}
+                options={{ headerShown: false }}
+                component={EventsScreen}
+            />
+            <EventsScreensStack.Screen
+                name={constants.SCREENS.EVENT.name}
+                component={EventScreen}
+            />
+        </EventsScreensStack.Navigator>
+    )
 }
 
 class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
@@ -59,7 +78,7 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
             >
                 <Tab.Screen
                     name={constants.SCREENS.EVENTS.name}
-                    component={EventsScreen}
+                    component={EventsStackScreen}
                 />
                 <Tab.Screen
                     name={constants.SCREENS.LOCATIONS.name}

@@ -8,6 +8,7 @@ export interface GroupBoxProps {
     description?: string
     gameType: GameType
     imageUri?: string
+    id: string
 }
 
 export default class GroupBox extends React.Component<GroupBoxProps> {
