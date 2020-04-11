@@ -13,7 +13,6 @@ import { AppState } from '../appState/appInitialState'
 import LoginScreen from './screens/loginScreen'
 import RegisterScreen from './screens/registerScreen'
 import { createStackNavigator } from '@react-navigation/stack'
-import WelcomeScreen from './screens/welcomeScreen'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -31,31 +30,13 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
         return !this.props.isUserLoggedIn ? (
             <Stack.Navigator>
                 <Stack.Screen
-                    name={constants.SCREENS.WELCOME.name}
-                    component={WelcomeScreen}
-                    // options={{
-                    //     headerStyle: {
-                    //         backgroundColor: '#00bfff'
-                    //     }
-                    // }}
-                />
-                <Stack.Screen
                     name={constants.SCREENS.LOGIN.name}
                     component={LoginScreen}
-                    // options={{
-                    //     headerStyle: {
-                    //         backgroundColor: '#00bfff'
-                    //     }
-                    // }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen
                     name={constants.SCREENS.REGISTER.name}
                     component={RegisterScreen}
-                    // options={{
-                    //     headerStyle: {
-                    //         backgroundColor: '#00bfff'
-                    //     }
-                    // }}
                 />
             </Stack.Navigator>
         ) : (

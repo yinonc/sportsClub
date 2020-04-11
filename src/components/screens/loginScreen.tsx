@@ -5,12 +5,13 @@ import { AppState } from '../../appState/appInitialState'
 import { setUserData } from '../../appState/stateActions'
 import { UserData } from '../../../schemas'
 import { getMockUserData } from '../../../mocks/userData'
-import Icon from 'react-native-vector-icons'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { Input } from 'react-native-elements'
+import constants from '../../constants'
 
 interface LoginScreenProps {
     setUserData(userData: UserData): void
+    navigation: any
 }
 
 const getUserData = async (): Promise<UserData> => {
@@ -22,6 +23,9 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         super(props)
     }
 
+    static navigationOptions = {
+        headerMode: null
+    }
     handleLoginPress() {
         getUserData().then((userData) => {
             this.props.setUserData(userData)
@@ -32,6 +36,10 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         // const user =
     }
 
+    handleGoToRegister = () => {
+        this.props.navigation.navigate(constants.SCREENS.REGISTER.name)
+    }
+
     handleForgotPassword = () => {
         console.log('forgot password')
     }
@@ -40,35 +48,31 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.text}>Wolcome Back to Sprotify !</Text>
+                    <Text style={styles.text}>Welcome Back to Sportify !</Text>
                 </View>
 
-                <View style={styles.content}>
+                <View style={styles.formContent}>
                     <Input
-                        label="UserName"
-                        labelStyle={{ marginBottom: 10 }}
-                        containerStyle={{ marginBottom: 20 }}
-                        inputStyle={{ textAlign: 'center' }}
-                        placeholder="Enter Email or UserName"
+                        containerStyle={styles.emailInput}
+                        placeholder="Email or UserName"
                         leftIcon={
                             <MaterialCommunityIcons
                                 name="email"
-                                size={30}
-                                color=""
+                                size={20}
+                                color="gray"
+                                style={styles.inputIcon}
                             />
                         }
                     />
                     <Input
-                        label="Password"
-                        labelStyle={{ marginBottom: 10 }}
                         containerStyle={{ marginBottom: 5 }}
-                        inputStyle={{ textAlign: 'center' }}
-                        placeholder="Enter password"
+                        placeholder="Password"
                         leftIcon={
                             <MaterialCommunityIcons
                                 name="lock"
-                                size={30}
-                                color=""
+                                size={20}
+                                color="gray"
+                                style={styles.inputIcon}
                             />
                         }
                     />
@@ -77,16 +81,30 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                             style={{}}
                             onPress={this.handleForgotPassword}
                         >
-                            <Text>Forgot Password?</Text>
+                            <Text style={styles.forgotPasswordText}>
+                                Forgot Password?
+                            </Text>
                         </TouchableOpacity>
                     </View>
-                    <Button
-                        onPress={this.handleLogin.bind(this)}
-                        title="Login"
-                    />
+                </View>
+                <View style={styles.contentRegisterButton}>
+                    <TouchableOpacity onPress={this.handleGoToRegister}>
+                        <View style={styles.goToRegister}>
+                            <Text style={styles.goToRegisterText}>
+                                New to Sportify? Sign Up
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.contentLoginButton}>
+                    <TouchableOpacity onPress={this.handleLogin}>
+                        <View style={styles.loginButton}>
+                            <Text style={styles.loginText}>Log In</Text>
+                        </View>
+                    </TouchableOpacity>
                     <Button
                         onPress={this.handleLoginPress.bind(this)}
-                        title="Click here to set login"
+                        title="Click here mocked login"
                     />
                 </View>
             </View>
@@ -109,31 +127,63 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: 'white',
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        padding: 30
+    },
+    emailInput: {
+        marginBottom: 20
+    },
+    inputIcon: {
+        marginRight: 10
     },
     header: {
-        paddingTop: 20,
-        flex: 2,
+        flex: 4,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
+        alignItems: 'center'
     },
     text: {
-        // fontFamily: 'moonlight',
         fontSize: 20
     },
-    content: {
-        flex: 6,
-        width: '100%',
-        paddingTop: '50%',
-        paddingLeft: '10%',
-        paddingRight: '10%',
-        marginBottom: 20,
-        backgroundColor: 'white'
+    formContent: {
+        flex: 2,
+        marginBottom: 20
+    },
+    contentLoginButton: {
+        backgroundColor: 'transparent',
+        flex: 2
+    },
+    loginButton: {
+        marginTop: 25,
+        backgroundColor: '#253B80',
+        margin: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 36,
+        borderRadius: 63
+    },
+    loginText: {
+        color: 'white'
+    },
+    contentRegisterButton: {
+        flex: 1
+    },
+    goToRegister: {
+        marginTop: 25,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    goToRegisterText: {
+        color: '#253B80',
+        fontWeight: 'bold'
     },
     forgotPassword: {
         alignItems: 'flex-end',
-        color: '#00bfff'
+        color: '#00bfff',
+        marginTop: 5
+    },
+    forgotPasswordText: {
+        color: 'gray'
     }
 })
