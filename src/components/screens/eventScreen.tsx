@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import MapView from 'react-native-maps';
+import MapView from 'react-native-maps'
 
 interface EventScreenProps {
     route: {
@@ -20,7 +20,7 @@ export default class EventScreen extends React.Component<EventScreenProps> {
     }
 
     componentDidMount() {
-        navigator.geolocation.getCurrentPosition(location => {
+        navigator.geolocation.getCurrentPosition((location) => {
             this.setState({
                 latitude: location.coords.latitude,
                 longitude: location.coords.longitude
@@ -57,7 +57,7 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                             latitude: this.state.latitude,
                             longitude: this.state.longitude,
                             latitudeDelta: 0,
-                            longitudeDelta: 0,
+                            longitudeDelta: 0
                         }}
                     />
                 </View>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         width: '90%',
-        flex: 3,
+        flex: 3
     },
     map: {
         height: 150
