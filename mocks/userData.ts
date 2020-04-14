@@ -2,19 +2,7 @@ import { UserData } from '../schemas'
 import { GroupBoxProps } from '../src/components/genericComponents/genericGroupBox'
 
 export function getMockUserData(): UserData {
-    return {
-        id: 'some_user_id',
-        firstName: 'Leonel',
-        lastName: 'Messi',
-        email: 'leomessi@gmail.com',
-        dateOfBirth: new Date(1992, 11, 6),
-        nickName: 'Leo',
-        friends: [],
-        profileImage: 'https://bootdey.com/img/Content/avatar/avatar1.png',
-        favoriteGames: ['soccer', 'basketball'],
-        rate: 8.7,
-        gamesPlayed: 102
-    }
+    return getAllMockUsers()[Math.floor(Math.random() * 5) + 1]
 }
 
 export function getAllMockUsers(): UserData[] {
@@ -24,9 +12,9 @@ export function getAllMockUsers(): UserData[] {
                 'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
             rate: 8.7,
             id: '1',
-            nickName: 'Leo',
+            nickName: 'yinon',
             friends: [],
-            email: 'leomessi@gmail.com',
+            email: 'yinonmail@gmail.com',
             firstName: 'Yinon',
             lastName: 'Cohen',
             dateOfBirth: new Date(1992, 11, 6),
@@ -38,7 +26,7 @@ export function getAllMockUsers(): UserData[] {
                 'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/23755648_10214682637922618_8526853554069157632_n.jpg?_nc_cat=104&_nc_sid=13bebb&_nc_ohc=IWxgTORN9SIAX9u4g_Y&_nc_ht=scontent.fhfa1-2.fna&oh=96e7aa15802f372166e3c513a9f3fd67&oe=5EB737BA',
             rate: 8.8,
             id: '2',
-            nickName: 'Leo',
+            nickName: 'Noma',
             friends: [],
             email: 'leomessi@gmail.com',
             firstName: 'Noam',
@@ -70,6 +58,20 @@ export function getAllMockUsers(): UserData[] {
             friends: [],
             email: 'leomessi@gmail.com',
             firstName: 'Lior',
+            lastName: 'Cohen',
+            dateOfBirth: new Date(1992, 11, 6),
+            gamesPlayed: 102,
+            favoriteGames: ['soccer', 'basketball']
+        },
+        {
+            profileImage:
+                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/13626487_10154263887770690_7933694097090940358_n.jpg?_nc_cat=105&_nc_sid=7aed08&_nc_ohc=hb9T37W_OBQAX-snQhk&_nc_ht=scontent.fhfa1-2.fna&oh=93f24fb0ed99fd181fd034551bc62c16&oe=5EBC6672',
+            rate: 8.3,
+            id: '5',
+            nickName: 'Leo',
+            friends: [],
+            email: 'leomessi@gmail.com',
+            firstName: 'Eyal',
             lastName: 'Cohen',
             dateOfBirth: new Date(1992, 11, 6),
             gamesPlayed: 102,

@@ -14,7 +14,7 @@ export function getMockEvents(): SportEvent[] {
         {
             eventId: '2',
             gameType: 'soccer',
-            userIds: ['1', '2', '3'],
+            userIds: ['1', '2', '5'],
             maxUsers: 15,
             title: 'Come 2 Win',
             location: "Modi'in",
@@ -23,7 +23,7 @@ export function getMockEvents(): SportEvent[] {
         {
             eventId: '3',
             gameType: 'basketball',
-            userIds: ['1', '2', '3', '4'],
+            userIds: ['1', '2', '3', '4', '5'],
             maxUsers: 9,
             title: '3 Vs 3',
             location: 'Petah Tikva',
@@ -50,7 +50,7 @@ export function getMockEvents(): SportEvent[] {
         {
             eventId: '6',
             gameType: 'baseball',
-            userIds: ['1', '4'],
+            userIds: ['1', '4', '5'],
             maxUsers: 10,
             title: 'Group baseball',
             location: 'Holon',
@@ -68,7 +68,7 @@ export function getMockEvents(): SportEvent[] {
         {
             eventId: '8',
             gameType: 'run',
-            userIds: ['1', '2', '3'],
+            userIds: ['2', '5'],
             maxUsers: 10,
             title: 'Group run',
             location: 'Tel Aviv',
@@ -104,7 +104,7 @@ export function getMockEvents(): SportEvent[] {
         {
             eventId: '12',
             gameType: 'basketball',
-            userIds: ['1', '2', '3'],
+            userIds: ['1', '2', '5'],
             maxUsers: 9,
             title: 'Street basketball',
             location: 'Tel Aviv',

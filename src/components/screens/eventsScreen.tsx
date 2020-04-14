@@ -99,7 +99,8 @@ export default class EventsScreen extends React.Component<
 
     onItemClick = (sportEvent: SportEvent) => {
         this.props.navigation.navigate(constants.SCREENS.EVENT.name, {
-            sportEvent
+            sportEvent,
+            participantsData: this.getParticipantsData(sportEvent.userIds)
         })
     }
 
