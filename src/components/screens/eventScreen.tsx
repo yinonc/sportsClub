@@ -2,7 +2,7 @@ import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import MapView from 'react-native-maps'
+import MapView, { Marker } from 'react-native-maps'
 
 interface EventScreenProps {
     route: {
@@ -14,23 +14,17 @@ interface EventScreenProps {
 }
 
 export default class EventScreen extends React.Component<EventScreenProps> {
-    state = {
-        latitude: 0,
-        longitude: 0
-    }
-
-    componentDidMount() {
-        navigator.geolocation.getCurrentPosition((location) => {
-            this.setState({
-                latitude: location.coords.latitude,
-                longitude: location.coords.longitude
-            })
-        })
-    }
+    // componentDidMount() {
+    //     navigator.geolocation.getCurrentPosition((location) => {
+    //         this.setState({
+    //             latitude: location.coords.latitude,
+    //             longitude: location.coords.longitude
+    //         })
+    //     })
+    // }
 
     render() {
         const { sportEvent, participantsData } = this.props.route.params
-        console.log(this.state)
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -52,14 +46,24 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                 </View>
                 <View style={styles.mapContainer}>
                     <MapView
+                        minZoomLevel={7}
                         style={styles.map}
                         initialRegion={{
-                            latitude: this.state.latitude,
-                            longitude: this.state.longitude,
-                            latitudeDelta: 0,
-                            longitudeDelta: 0
+                            latitude: sportEvent.location.latitude,
+                            longitude: sportEvent.location.longitude,
+                            latitudeDelta: 0.04,
+                            longitudeDelta: 0.05
                         }}
-                    />
+                    >
+                        <Marker
+                            coordinate={{
+                                latitude: sportEvent.location.latitude,
+                                longitude: sportEvent.location.longitude
+                            }}
+                            title={sportEvent.location.addressTitle}
+                            description={'description'}
+                        />
+                    </MapView>
                 </View>
                 <View style={styles.chatContainer}>
                     <Text>Chat here</Text>

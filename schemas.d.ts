@@ -29,6 +29,7 @@ export interface UserData {
 export type participantType = 'GroupManager' | 'Regular'
 
 export interface Group {
+    id: string
     users: {
         [userId: string]: participantType
     } // In this way we can save both the 'participantType' and to get user in group with o(1) complexity.
@@ -37,12 +38,16 @@ export interface Group {
 }
 
 export interface SportEvent {
+    groupId?: Group['id']
     eventId: string
     userIds: UserData['id'][]
-    // game: Game
     gameType: GameType
     title: string
     maxUsers: number
-    location: string // Google place id / something else ?
+    location: {
+        latitude: number
+        longitude: number
+        addressTitle: string
+    }
     date: Date
 }

@@ -76,7 +76,9 @@ export default class EventBox extends React.Component<EventBoxProps> {
                                         size={15}
                                         color="black"
                                     />
-                                    <Text>{this.props.location}</Text>
+                                    <Text>
+                                        {this.props.location.addressTitle}
+                                    </Text>
                                 </View>
                             </View>
                             <View style={styles.infoRight}>

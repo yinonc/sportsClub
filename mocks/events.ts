@@ -8,7 +8,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '3', '4'],
             maxUsers: 10,
             title: 'Friday Soccer',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: 'Ironi A'
+            },
             date: new Date(2020, 3, 11, 3, 24, 0)
         },
         {
@@ -17,7 +21,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '5'],
             maxUsers: 15,
             title: 'Come 2 Win',
-            location: "Modi'in",
+            location: {
+                longitude: 34.951977,
+                latitude: 32.573905,
+                addressTitle: `Zichron Yaakov`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -26,7 +34,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '3', '4', '5'],
             maxUsers: 9,
             title: '3 Vs 3',
-            location: 'Petah Tikva',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: `Deshe Modi'in`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -35,7 +47,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1'],
             maxUsers: 2,
             title: '1 X 1',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 34.78176759999999,
+                latitude: 32.0852999,
+                addressTitle: `Tel Aviv`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -44,7 +60,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['2', '3', '4'],
             maxUsers: 10,
             title: 'Soccer 5 X 5',
-            location: 'Beer Sheva',
+            location: {
+                longitude: 34.78176759999999,
+                latitude: 32.0852999,
+                addressTitle: `Tel Aviv`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -53,7 +73,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '4', '5'],
             maxUsers: 10,
             title: 'Group baseball',
-            location: 'Holon',
+            location: {
+                longitude: 34.951977,
+                latitude: 32.573905,
+                addressTitle: `Zichron Yaakov`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -62,7 +86,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '4'],
             maxUsers: 10,
             title: 'our basketball',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: 'Deshe'
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -71,7 +99,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['2', '5'],
             maxUsers: 10,
             title: 'Group run',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: 'Deshe Modiin'
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -80,7 +112,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '3', '4'],
             maxUsers: 4,
             title: '2 X 2',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: 'Deshe'
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -89,7 +125,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '3', '4'],
             maxUsers: 6,
             title: 'Saturday soccer',
-            location: "Modi'in",
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: `Modi'in`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -98,7 +138,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '3', '4'],
             maxUsers: 20,
             title: 'Running together',
-            location: 'Zichron Yaakov',
+            location: {
+                longitude: 35.010397,
+                latitude: 31.890267,
+                addressTitle: `Modi'in`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -107,7 +151,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1', '2', '5'],
             maxUsers: 9,
             title: 'Street basketball',
-            location: 'Tel Aviv',
+            location: {
+                longitude: 34.78176759999999,
+                latitude: 32.0852999,
+                addressTitle: `Tel Aviv`
+            },
             date: new Date(2020, 5, 5)
         },
         {
@@ -116,7 +164,11 @@ export function getMockEvents(): SportEvent[] {
             userIds: ['1'],
             maxUsers: 2,
             title: 'Singles Tennis',
-            location: 'Jerusalem',
+            location: {
+                longitude: 34.78176759999999,
+                latitude: 32.0852999,
+                addressTitle: `Tel Aviv`
+            },
             date: new Date(2020, 5, 5)
         }
     ]
