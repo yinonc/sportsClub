@@ -1,17 +1,38 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import * as Facebook from 'expo-facebook';
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { setUserData } from '../../appState/stateActions'
 import { UserData } from '../../../schemas'
 import { getMockUserData } from '../../../mocks/userData'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import { Input } from 'react-native-elements'
+import { SocialIcon, Input } from 'react-native-elements'
 import constants from '../../constants'
 
 interface LoginScreenProps {
     setUserData(userData: UserData): void
     navigation: any
+}
+
+interface FacebookUserData {
+    email: string
+    first_name: string
+    last_name: string
+    picture: {
+        data: {
+            url: string
+        }
+    }
+    birthday: string
+}
+
+function getDateOfBirthFromFacebookBirthDay(birthday: string): Date | null {
+    if (!birthday) {
+        return null;
+    }
+    const dateAsArray = birthday.split('/').map(Number)
+    return new Date(dateAsArray[2], dateAsArray[0], dateAsArray[1])
 }
 
 const getUserData = async (): Promise<UserData> => {
@@ -37,6 +58,46 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
 
     handleForgotPassword = () => {
         console.log('forgot password')
+    }
+
+    /**
+     * Facebook app login:
+     * Expo-Facebook sdk doc in here: https://docs.expo.io/versions/latest/sdk/facebook/
+     * Fetching user data with: https://developers.facebook.com/docs/graph-api/reference/user/
+     */
+    handleFacebookLogin = async () => {
+        await Facebook.initializeAsync('685137492030190', 'SportsClub')
+        const {
+            type,
+            // @ts-ignore
+            token,
+            // expires,
+            // permissions,
+            // declinedPermissions,
+        } = await Facebook.logInWithReadPermissionsAsync({
+            permissions: ['public_profile'],
+        });
+        if (type === 'success') {
+            // Get the user's name using Facebook's Graph API
+            const response = await fetch(`https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`)
+            const resJson = await response.json() as FacebookUserData
+            const userData: UserData = {
+                firstName: resJson.first_name,
+                lastName: resJson.last_name,
+                email: resJson.email,
+                nickName: resJson.first_name,
+                profileImage: resJson.picture.data.url,
+                dateOfBirth: getDateOfBirthFromFacebookBirthDay(resJson.birthday),
+                rate: 8.7,
+                gamesPlayed: 102,
+                favoriteGames: ['soccer', 'basketball'],
+                id: '10',
+                friends: [],
+            }
+            this.props.setUserData(userData);
+        } else {
+            console.log('failed to get ')
+        }
     }
 
     render() {
@@ -97,6 +158,12 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                             <Text style={styles.loginText}>Log In</Text>
                         </View>
                     </TouchableOpacity>
+                    <SocialIcon
+                        onPress={this.handleFacebookLogin}
+                        title='Sign In With Facebook'
+                        button
+                        type='facebook'
+                    />
                     <Button
                         onPress={this.handleMockLogin.bind(this)}
                         title="Click here to mock login"
@@ -134,7 +201,7 @@ const styles = StyleSheet.create({
         marginRight: 10
     },
     header: {
-        flex: 4,
+        flex: 3,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -142,15 +209,13 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     formContent: {
-        flex: 2,
-        marginBottom: 20
+        flex: 2
     },
     contentLoginButton: {
         backgroundColor: 'transparent',
         flex: 2
     },
     loginButton: {
-        marginTop: 25,
         backgroundColor: '#253B80',
         margin: 10,
         alignItems: 'center',
@@ -165,7 +230,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     goToRegister: {
-        marginTop: 25,
         alignItems: 'center',
         justifyContent: 'center'
     },
