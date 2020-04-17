@@ -170,6 +170,19 @@ export function getMockEvents(): SportEvent[] {
                 addressTitle: `Tel Aviv`
             },
             date: new Date(2020, 5, 5)
+        },
+        {
+            eventId: '14',
+            gameType: 'tennis',
+            userIds: ['1', '5'],
+            maxUsers: 4,
+            title: 'Doubles Tennis',
+            location: {
+                longitude: 34.78176759999999,
+                latitude: 32.0852999,
+                addressTitle: `Tel Aviv`
+            },
+            date: new Date(2020, 5, 5)
         }
     ]
 }
