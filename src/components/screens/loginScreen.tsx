@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as Facebook from 'expo-facebook';
+import * as Facebook from 'expo-facebook'
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { setUserData } from '../../appState/stateActions'
@@ -29,7 +29,7 @@ interface FacebookUserData {
 
 function getDateOfBirthFromFacebookBirthDay(birthday: string): Date | null {
     if (!birthday) {
-        return null;
+        return null
     }
     const dateAsArray = birthday.split('/').map(Number)
     return new Date(dateAsArray[2], dateAsArray[0], dateAsArray[1])
@@ -70,31 +70,35 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         const {
             type,
             // @ts-ignore
-            token,
+            token
             // expires,
             // permissions,
             // declinedPermissions,
         } = await Facebook.logInWithReadPermissionsAsync({
-            permissions: ['public_profile'],
-        });
+            permissions: ['public_profile']
+        })
         if (type === 'success') {
             // Get the user's name using Facebook's Graph API
-            const response = await fetch(`https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`)
-            const resJson = await response.json() as FacebookUserData
+            const response = await fetch(
+                `https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`
+            )
+            const resJson = (await response.json()) as FacebookUserData
             const userData: UserData = {
                 firstName: resJson.first_name,
                 lastName: resJson.last_name,
                 email: resJson.email,
                 nickName: resJson.first_name,
                 profileImage: resJson.picture.data.url,
-                dateOfBirth: getDateOfBirthFromFacebookBirthDay(resJson.birthday),
+                dateOfBirth: getDateOfBirthFromFacebookBirthDay(
+                    resJson.birthday
+                ),
                 rate: 8.7,
                 gamesPlayed: 102,
                 favoriteGames: ['soccer', 'basketball'],
                 id: '10',
-                friends: [],
+                friends: []
             }
-            this.props.setUserData(userData);
+            this.props.setUserData(userData)
         } else {
             console.log('failed to get ')
         }
@@ -160,9 +164,9 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                     </TouchableOpacity>
                     <SocialIcon
                         onPress={this.handleFacebookLogin}
-                        title='Sign In With Facebook'
+                        title="Sign In With Facebook"
                         button
-                        type='facebook'
+                        type="facebook"
                     />
                     <Button
                         onPress={this.handleMockLogin.bind(this)}
