@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import * as Facebook from 'expo-facebook'
 import { Button, StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
-import { setUserData } from '../../appState/stateActions'
+import { getUserDataAction } from '../../appState/stateActions'
 import { UserData } from '../../../schemas'
 import { getMockUserData } from '../../../mocks/userData'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -181,7 +181,7 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
 const mapStateToProps = (state: AppState) => ({})
 
 const mapDispatchToProps = (dispatch) => ({
-    setUserData: (userData) => dispatch(setUserData(userData))
+    setUserData: (userData) => dispatch(getUserDataAction(userData))
 })
 
 const LoginScreen = connect(

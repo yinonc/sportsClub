@@ -1,6 +1,12 @@
 import stateTypes from './stateTypes'
-import {UserData} from "../../schemas";
+import { UserData } from '../../schemas'
 
-export const setCounter = (counter: number) => ({type: stateTypes.SET_COUNTER, counter})
+export const setCounter = (counter: number) => ({
+    type: stateTypes.SET_COUNTER,
+    counter
+})
 
-export const setUserData = (userData: UserData) => ({type: stateTypes.LOGIN, userData})
+export const getUserDataAction = (userData: UserData) => ({
+    type: stateTypes.LOGIN,
+    userData
+})
