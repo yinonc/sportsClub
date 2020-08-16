@@ -18,7 +18,7 @@ export default {
         },
         SEARCH: {
             name: 'SEARCH',
-            symbolName: 'map-search'
+            symbolName: 'table-search'
         },
         PROFILE: {
             name: 'PROFILE',
@@ -34,7 +34,11 @@ export default {
         },
         EVENTS: {
             name: 'EVENTS',
-            symbolName: 'view-list'
+            symbolName: 'notification-clear-all'
+        },
+        NOTIFICATIONS: {
+            name: 'NOTIFICATIONS',
+            symbolName: 'bell'
         },
         EVENT: {
             name: 'EVENT',

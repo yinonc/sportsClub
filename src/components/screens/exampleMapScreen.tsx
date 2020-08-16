@@ -3,8 +3,6 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MapView, { Marker } from 'react-native-maps'
-import EventItem from '../genericComponents/eventItem'
-import EventItemSlider from '../genericComponents/eventItemSlider'
 
 interface EventScreenProps {
     route: {
@@ -14,36 +12,6 @@ interface EventScreenProps {
         }
     }
 }
-
-const eventItems = [
-    {
-        onPress: () => {},
-        isSelected: false,
-        id: 'ball',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    },
-    {
-        onPress: () => {},
-        isSelected: true,
-        id: 'water',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    },
-    {
-        onPress: () => {},
-        isSelected: true,
-        id: 'water2',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    }
-]
 
 export default class EventScreen extends React.Component<EventScreenProps> {
     // componentDidMount() {
@@ -60,23 +28,21 @@ export default class EventScreen extends React.Component<EventScreenProps> {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <View style={styles.eventHeaderInfo}>
-                        <MaterialCommunityIcons
-                            name={sportEvent.gameType}
-                            size={30}
-                            color="black"
+                    <MaterialCommunityIcons
+                        name={sportEvent.gameType}
+                        size={30}
+                        color="black"
+                    />
+                    <Text>{`${sportEvent.title}:`}</Text>
+                </View>
+                <View style={styles.participants}>
+                    {participantsData.map((participant) => (
+                        <Image
+                            key={participant.id}
+                            source={{ uri: participant.profileImage }}
+                            style={styles.participantImage}
                         />
-                        <Text>{`${sportEvent.title}:`}</Text>
-                    </View>
-                    <View style={styles.participants}>
-                        {participantsData.map((participant) => (
-                            <Image
-                                key={participant.id}
-                                source={{ uri: participant.profileImage }}
-                                style={styles.participantImage}
-                            />
-                        ))}
-                    </View>
+                    ))}
                 </View>
                 <View style={styles.mapContainer}>
                     <MapView
@@ -99,9 +65,6 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                         />
                     </MapView>
                 </View>
-                <View style={styles.eventItems}>
-                    <EventItemSlider eventItems={eventItems} />
-                </View>
                 <View style={styles.chatContainer}>
                     <Text>Chat here</Text>
                 </View>
@@ -118,20 +81,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     header: {
-        height: 50,
-        width: '100%',
-        display: 'flex',
+        flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center'
     },
-    eventHeaderInfo: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     participants: {
+        flex: 1,
         flexDirection: 'row'
     },
     participantImage: {
@@ -144,15 +100,10 @@ const styles = StyleSheet.create({
     },
     mapContainer: {
         width: '90%',
-        overflow: 'hidden',
-        borderRadius: 10,
         flex: 3
     },
     map: {
         height: 150
-    },
-    eventItems: {
-        width: '100%'
     },
     chatContainer: {
         flex: 6,

@@ -5,7 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { Provider, connect } from 'react-redux'
 
 import LocationsScreen from './screens/locationsScreen'
-import EventsScreen from './screens/eventsScreen'
+import EventsScreen from './screens/eventScreen'
+import NotificationsScreen from './screens/notificationsScreen'
+import SearchScreen from './screens/searchScreen'
 import ProfileScreen from './screens/profileScreen'
 import EventScreen from './screens/eventScreen'
 import RegisterScreen from './screens/registerScreen'
@@ -22,21 +24,21 @@ interface ScreensContainerStateProps {
     isUserLoggedIn: boolean
 }
 
-const EventsScreensStack = createStackNavigator()
+const SearchScreensStack = createStackNavigator()
 
-function EventsStackScreen() {
+function SearchStackScreen() {
     return (
-        <EventsScreensStack.Navigator>
-            <EventsScreensStack.Screen
-                name={constants.SCREENS.EVENTS.name}
+        <SearchScreensStack.Navigator>
+            <SearchScreensStack.Screen
+                name={constants.SCREENS.SEARCH.name}
                 options={{ headerShown: false }}
-                component={EventsScreen}
+                component={SearchScreen}
             />
-            <EventsScreensStack.Screen
+            <SearchScreensStack.Screen
                 name={constants.SCREENS.EVENT.name}
                 component={EventScreen}
             />
-        </EventsScreensStack.Navigator>
+        </SearchScreensStack.Navigator>
     )
 }
 
@@ -73,16 +75,25 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
                 })}
                 tabBarOptions={{
                     activeTintColor: 'tomato',
-                    inactiveTintColor: 'gray'
+                    inactiveTintColor: 'gray',
+                    labelStyle: { fontSize: 9 }
                 }}
             >
                 <Tab.Screen
-                    name={constants.SCREENS.EVENTS.name}
-                    component={EventsStackScreen}
+                    name={constants.SCREENS.SEARCH.name}
+                    component={SearchStackScreen}
                 />
                 <Tab.Screen
                     name={constants.SCREENS.LOCATIONS.name}
                     component={LocationsScreen}
+                />
+                <Tab.Screen
+                    name={constants.SCREENS.EVENTS.name}
+                    component={EventsScreen}
+                />
+                <Tab.Screen
+                    name={constants.SCREENS.NOTIFICATIONS.name}
+                    component={NotificationsScreen}
                 />
                 <Tab.Screen
                     name={constants.SCREENS.PROFILE.name}
