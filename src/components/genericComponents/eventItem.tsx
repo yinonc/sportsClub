@@ -1,30 +1,61 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
-export interface EventItemProps {
-    icon: React.FunctionComponent
-    count: number
+import { IEventItem } from '../../../schemas'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+interface EventItemProps {
     id: string
-    onPress(): void
     isSelected: boolean
+    eventItemDef: IEventItem
+    onPress(eventItem: IEventItem): void
 }
 
-export default class EventItem extends React.Component<EventItemProps> {
+interface EventItemState {
+    isSelected: boolean
+    count: number
+}
+
+export default class EventItem extends React.Component<
+    EventItemProps,
+    EventItemState
+> {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isSelected: this.props.isSelected,
+            count: this.props.eventItemDef.bringUsers.length
+        }
+    }
+
+    onItemPress = () => {
+        const { count, isSelected } = this.state
+        this.setState({
+            isSelected: !isSelected,
+            count: isSelected ? count - 1 : count + 1
+        })
+        this.props.onPress(this.props.eventItemDef)
+    }
+
     render() {
-        const Icon = this.props.icon
+        const { count } = this.state
         return (
             <TouchableOpacity
                 style={[
                     styles.container,
-                    this.props.isSelected
+                    this.state.isSelected
                         ? styles.styleSelected
                         : styles.styleDeselected
                 ]}
-                onPress={this.props.onPress}
+                onPress={this.onItemPress}
             >
-                <Icon />
+                <MaterialCommunityIcons
+                    name={this.props.eventItemDef.id}
+                    size={25}
+                    color={'white'}
+                />
                 <Text style={styles.number}>{`${
-                    this.props.count > 0 ? '+' : ''
-                }${this.props.count}`}</Text>
+                    count > 0 ? '+' : ''
+                }${count}`}</Text>
             </TouchableOpacity>
         )
     }

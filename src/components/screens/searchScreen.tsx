@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import React from 'react'
 import {
     StyleSheet,
@@ -12,8 +11,8 @@ import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getMockEvents } from '../../../mocks/events'
 import EventBox from '../genericComponents/genericEventBox'
-import { getAllMockUsers } from '../../../mocks/userData'
 import constants from '../../constants'
+import { getUserDataById } from '../../userUtils'
 type EventsFilter = 'EVENTS' | 'GROUPS' | 'PROFILES'
 
 interface SearchScreenProps {
@@ -93,8 +92,7 @@ export default class SearchScreen extends React.Component<
     }
 
     getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
-        const usersDataMap = _.keyBy(getAllMockUsers(), 'id')
-        return userIds.map((id) => usersDataMap[id])
+        return userIds.map((id) => getUserDataById(id))
     }
 
     onItemClick = (sportEvent: SportEvent) => {

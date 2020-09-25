@@ -1,12 +1,14 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { SportEvent, UserData } from '../../../schemas'
+import { IEventItem, SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MapView, { Marker } from 'react-native-maps'
-import EventItem from '../genericComponents/eventItem'
 import EventItemSlider from '../genericComponents/eventItemSlider'
+import { AppState } from '../../appState/appInitialState'
+import { connect } from 'react-redux'
 
 interface EventScreenProps {
+    currentUserData: UserData
     route: {
         params: {
             sportEvent: SportEvent
@@ -15,37 +17,7 @@ interface EventScreenProps {
     }
 }
 
-const eventItems = [
-    {
-        onPress: () => {},
-        isSelected: false,
-        id: 'ball',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    },
-    {
-        onPress: () => {},
-        isSelected: true,
-        id: 'water',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    },
-    {
-        onPress: () => {},
-        isSelected: true,
-        id: 'water2',
-        icon: () => (
-            <MaterialCommunityIcons name="soccer" size={30} color="white" />
-        ),
-        count: 5
-    }
-]
-
-export default class EventScreen extends React.Component<EventScreenProps> {
+class EventScreenPure extends React.Component<EventScreenProps> {
     // componentDidMount() {
     //     navigator.geolocation.getCurrentPosition((location) => {
     //         this.setState({
@@ -54,6 +26,8 @@ export default class EventScreen extends React.Component<EventScreenProps> {
     //         })
     //     })
     // }
+
+    onEventItemClick = (eventItem: IEventItem) => {}
 
     render() {
         const { sportEvent, participantsData } = this.props.route.params
@@ -100,7 +74,11 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                     </MapView>
                 </View>
                 <View style={styles.eventItems}>
-                    <EventItemSlider eventItems={eventItems} />
+                    <EventItemSlider
+                        currentUserId={this.props.currentUserData.id}
+                        eventItems={sportEvent.eventItems}
+                        onItemClick={this.onEventItemClick}
+                    />
                 </View>
                 <View style={styles.chatContainer}>
                     <Text>Chat here</Text>
@@ -109,6 +87,12 @@ export default class EventScreen extends React.Component<EventScreenProps> {
         )
     }
 }
+
+const mapStateToProps = (state: AppState) => ({
+    currentUserData: state.userData
+})
+
+export default connect(mapStateToProps)(EventScreenPure)
 
 const styles = StyleSheet.create({
     container: {

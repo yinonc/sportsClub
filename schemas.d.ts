@@ -6,7 +6,7 @@ export type GameType =
     | 'cycling'
     | 'baseball'
 
-type userId = string
+export type userId = string
 
 export interface Game {
     type: GameType
@@ -48,4 +48,10 @@ export interface SportEvent {
         addressTitle: string
     }
     date: Date
+    eventItems: IEventItem[]
+}
+
+export interface IEventItem {
+    id: string
+    bringUsers: UserId[]
 }

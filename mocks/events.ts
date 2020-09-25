@@ -13,7 +13,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: 'Ironi A'
             },
-            date: new Date(2020, 3, 11, 3, 24, 0)
+            date: new Date(2020, 3, 11, 3, 24, 0),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1', '3'] },
+                { id: 'soccer', bringUsers: ['3'] }
+            ]
         },
         {
             eventId: '2',
@@ -26,7 +30,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.573905,
                 addressTitle: `Zichron Yaakov`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1', '2'] },
+                { id: 'soccer', bringUsers: ['5'] }
+            ]
         },
         {
             eventId: '3',
@@ -39,7 +47,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: `Deshe Modi'in`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['4', '2'] },
+                { id: 'basketball', bringUsers: ['5', '3'] }
+            ]
         },
         {
             eventId: '4',
@@ -52,7 +64,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.0852999,
                 addressTitle: `Tel Aviv`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'tennis', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '5',
@@ -65,7 +81,8 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.0852999,
                 addressTitle: `Tel Aviv`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: []
         },
         {
             eventId: '6',
@@ -78,7 +95,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.573905,
                 addressTitle: `Zichron Yaakov`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '7',
@@ -91,7 +112,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: 'Deshe'
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '8',
@@ -104,7 +129,8 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: 'Deshe Modiin'
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [{ id: 'bottle-wine', bringUsers: ['2', '5'] }]
         },
         {
             eventId: '9',
@@ -117,7 +143,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: 'Deshe'
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '10',
@@ -130,7 +160,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: `Modi'in`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '11',
@@ -143,7 +177,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 31.890267,
                 addressTitle: `Modi'in`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '12',
@@ -156,7 +194,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.0852999,
                 addressTitle: `Tel Aviv`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '13',
@@ -169,7 +211,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.0852999,
                 addressTitle: `Tel Aviv`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         },
         {
             eventId: '14',
@@ -182,7 +228,11 @@ export function getMockEvents(): SportEvent[] {
                 latitude: 32.0852999,
                 addressTitle: `Tel Aviv`
             },
-            date: new Date(2020, 5, 5)
+            date: new Date(2020, 5, 5),
+            eventItems: [
+                { id: 'bottle-wine', bringUsers: ['1'] },
+                { id: 'ball', bringUsers: ['1'] }
+            ]
         }
     ]
 }
