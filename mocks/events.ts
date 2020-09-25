@@ -16,7 +16,8 @@ export function getMockEvents(): SportEvent[] {
             date: new Date(2020, 3, 11, 3, 24, 0),
             eventItems: [
                 { id: 'bottle-wine', bringUsers: ['1', '3'] },
-                { id: 'soccer', bringUsers: ['3'] }
+                { id: 'soccer', bringUsers: ['3'] },
+                { id: 'tshirt-crew-outline', bringUsers: ['1'] }
             ]
         },
         {
@@ -33,7 +34,8 @@ export function getMockEvents(): SportEvent[] {
             date: new Date(2020, 5, 5),
             eventItems: [
                 { id: 'bottle-wine', bringUsers: ['1', '2'] },
-                { id: 'soccer', bringUsers: ['5'] }
+                { id: 'soccer', bringUsers: ['5'] },
+                { id: 'tshirt-crew-outline', bringUsers: ['1'] }
             ]
         },
         {

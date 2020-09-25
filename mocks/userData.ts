@@ -9,7 +9,7 @@ export function getAllMockUsers(): UserData[] {
     return [
         {
             profileImage:
-                'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=85a577&_nc_ohc=3pc0K4cYBaIAX8gxaSf&_nc_ht=scontent.fhfa1-1.fna&oh=76684b1044bfe5b7cac1298c2d66d6b2&oe=5EB639BA',
+                'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=09cbfe&_nc_ohc=KqIDl4sfKM8AX-W-kIo&_nc_ht=scontent.fhfa1-1.fna&oh=72943a1bb4e9e5c70553687c96f20f74&oe=5F93B5BA',
             rate: 8.7,
             id: '1',
             nickName: 'yinon',
@@ -23,7 +23,7 @@ export function getAllMockUsers(): UserData[] {
         },
         {
             profileImage:
-                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/23755648_10214682637922618_8526853554069157632_n.jpg?_nc_cat=104&_nc_sid=13bebb&_nc_ohc=IWxgTORN9SIAX9u4g_Y&_nc_ht=scontent.fhfa1-2.fna&oh=96e7aa15802f372166e3c513a9f3fd67&oe=5EB737BA',
+                'https://instagram.fhfa1-2.fna.fbcdn.net/v/t51.2885-19/s320x320/91678577_1181080608898119_1029039611109703680_n.jpg?_nc_ht=instagram.fhfa1-2.fna.fbcdn.net&_nc_ohc=lLxI9SYf9qIAX_27idW&oh=c23c05a63bfda4491986910a68f23793&oe=5F95A729',
             rate: 8.8,
             id: '2',
             nickName: 'Noma',
@@ -37,7 +37,7 @@ export function getAllMockUsers(): UserData[] {
         },
         {
             profileImage:
-                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t31.0-8/s960x960/28947857_10213631739446210_1287137819099110066_o.jpg?_nc_cat=105&_nc_sid=7aed08&_nc_ohc=KQTsdHAj3Q0AX-Kz-3b&_nc_ht=scontent.fhfa1-2.fna&_nc_tp=7&oh=404e7fecf16d1f984f6469369e91dac6&oe=5EB4A188',
+                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/90877461_10219270495211580_1610044773819744256_n.jpg?_nc_cat=105&_nc_sid=09cbfe&_nc_ohc=iuLwl-ROShMAX8LdL1z&_nc_ht=scontent.fhfa1-2.fna&oh=0f8707667db0f8a1ef09124b09541f70&oe=5F952BD7',
             rate: 9.2,
             id: '3',
             nickName: 'Leo',
@@ -51,21 +51,21 @@ export function getAllMockUsers(): UserData[] {
         },
         {
             profileImage:
-                'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/40243233_2083668025001303_9081320133888049152_n.jpg?_nc_cat=111&_nc_sid=7aed08&_nc_ohc=Y6naR2OPi40AX844B3W&_nc_ht=scontent.fhfa1-1.fna&oh=fbce1d75cc53ba6944c313517ec5e603&oe=5EB581CD',
+                'https://instagram.fhfa1-2.fna.fbcdn.net/v/t51.2885-19/s320x320/56905173_2232296596864973_8253886163098533888_n.jpg?_nc_ht=instagram.fhfa1-2.fna.fbcdn.net&_nc_ohc=LecCDP_PbK0AX-kT4xJ&oh=486accab543355bf3a21e37cfc7e3be3&oe=5F9767BF',
             rate: 8.3,
             id: '4',
-            nickName: 'Leo',
+            nickName: 'Sean',
             friends: [],
             email: 'leomessi@gmail.com',
-            firstName: 'Lior',
-            lastName: 'Cohen',
+            firstName: 'Sean',
+            lastName: 'Pindo',
             dateOfBirth: new Date(1992, 11, 6),
             gamesPlayed: 102,
             favoriteGames: ['soccer', 'basketball']
         },
         {
             profileImage:
-                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/13626487_10154263887770690_7933694097090940358_n.jpg?_nc_cat=105&_nc_sid=7aed08&_nc_ohc=hb9T37W_OBQAX-snQhk&_nc_ht=scontent.fhfa1-2.fna&oh=93f24fb0ed99fd181fd034551bc62c16&oe=5EBC6672',
+                'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/46516775_10156716297985690_1188493196846432256_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=0q38P7xPFU4AX_MF0Q4&_nc_ht=scontent.fhfa1-2.fna&oh=bb1743e24b4e01890fc9a141e2bf905a&oe=5F920455',
             rate: 8.3,
             id: '5',
             nickName: 'Leo',

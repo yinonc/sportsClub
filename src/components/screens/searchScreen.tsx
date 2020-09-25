@@ -12,7 +12,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { getMockEvents } from '../../../mocks/events'
 import EventBox from '../genericComponents/genericEventBox'
 import constants from '../../constants'
-import { getUserDataById } from '../../userUtils'
+import { getUserDataById, getParticipantsData } from '../../userUtils'
 type EventsFilter = 'EVENTS' | 'GROUPS' | 'PROFILES'
 
 interface SearchScreenProps {
@@ -91,14 +91,10 @@ export default class SearchScreen extends React.Component<
         })
     }
 
-    getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
-        return userIds.map((id) => getUserDataById(id))
-    }
-
     onItemClick = (sportEvent: SportEvent) => {
         this.props.navigation.navigate(constants.SCREENS.EVENT.name, {
             sportEvent,
-            participantsData: this.getParticipantsData(sportEvent.userIds)
+            participantsData: getParticipantsData(sportEvent.userIds)
         })
     }
 
@@ -165,7 +161,7 @@ export default class SearchScreen extends React.Component<
                     <ScrollView style={styles.eventsListContainer}>
                         {this.state.events.map((sportEvent) => (
                             <EventBox
-                                getParticipantsData={this.getParticipantsData}
+                                getParticipantsData={getParticipantsData}
                                 onItemClick={() => this.onItemClick(sportEvent)}
                                 key={sportEvent.eventId}
                                 {...sportEvent}

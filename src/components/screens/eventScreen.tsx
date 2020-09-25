@@ -6,6 +6,7 @@ import MapView, { Marker } from 'react-native-maps'
 import EventItemSlider from '../genericComponents/eventItemSlider'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
+import { getParticipantsData } from '../../userUtils'
 
 interface EventScreenProps {
     currentUserData: UserData
@@ -17,7 +18,17 @@ interface EventScreenProps {
     }
 }
 
-class EventScreenPure extends React.Component<EventScreenProps> {
+interface EventScreenState {
+    popoverWidth: number
+}
+
+class EventScreenPure extends React.Component<
+    EventScreenProps,
+    EventScreenState
+> {
+    state = {
+        popoverWidth: 200
+    }
     // componentDidMount() {
     //     navigator.geolocation.getCurrentPosition((location) => {
     //         this.setState({
@@ -32,7 +43,14 @@ class EventScreenPure extends React.Component<EventScreenProps> {
     render() {
         const { sportEvent, participantsData } = this.props.route.params
         return (
-            <View style={styles.container}>
+            <View
+                onLayout={(event) => {
+                    this.setState({
+                        popoverWidth: event.nativeEvent.layout.width
+                    })
+                }}
+                style={styles.container}
+            >
                 <View style={styles.header}>
                     <View style={styles.eventHeaderInfo}>
                         <MaterialCommunityIcons
@@ -75,6 +93,8 @@ class EventScreenPure extends React.Component<EventScreenProps> {
                 </View>
                 <View style={styles.eventItems}>
                     <EventItemSlider
+                        popoverWidth={this.state.popoverWidth}
+                        getParticipantsData={getParticipantsData}
                         currentUserId={this.props.currentUserData.id}
                         eventItems={sportEvent.eventItems}
                         onItemClick={this.onEventItemClick}

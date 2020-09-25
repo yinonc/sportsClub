@@ -2,11 +2,13 @@ import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 import EventItem from './eventItem'
 import PlusItem from './plusItem'
-import { IEventItem, userId } from '../../../schemas'
+import { IEventItem, UserData, userId } from '../../../schemas'
 interface EventItemSliderProps {
+    popoverWidth: number
     currentUserId: userId
     eventItems: IEventItem[]
     onItemClick(eventItem: IEventItem): void
+    getParticipantsData(userIds: userId[]): UserData[]
 }
 
 export default class EventItemSlider extends React.Component<
@@ -19,6 +21,8 @@ export default class EventItemSlider extends React.Component<
                     <PlusItem key="plus-item" onPress={() => {}} />
                     {this.props.eventItems.map((eventItem) => (
                         <EventItem
+                            popoverWidth={this.props.popoverWidth}
+                            getParticipantsData={this.props.getParticipantsData}
                             isSelected={eventItem.bringUsers.includes(
                                 this.props.currentUserId
                             )}

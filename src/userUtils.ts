@@ -8,3 +8,7 @@ import { getAllMockUsers } from '../mocks/userData'
 export const getUserDataById = (userId: userId): UserData | undefined => {
     return getAllMockUsers().find((userData) => userData.id === userId)
 }
+
+export const getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
+    return userIds.map((id) => getUserDataById(id))
+}
