@@ -2,6 +2,7 @@ import { GameType } from '../../../schemas'
 import React from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import generalStyle from '../../styles/generalStyle'
 
 export interface GroupBoxProps {
     title: string
@@ -26,7 +27,7 @@ export default class GroupBox extends React.Component<GroupBoxProps> {
                     style={styles.gameTypeIcon}
                     name={this.props.gameType}
                     size={30}
-                    color="black"
+                    color={generalStyle.GENERAL.BOX.ICON_COLOR}
                 />
             </View>
         )
@@ -57,7 +58,8 @@ const styles = StyleSheet.create({
         borderColor: 'white'
     },
     title: {
-        flex: 5
+        flex: 5,
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
     },
     gameTypeIcon: {
         flex: 1

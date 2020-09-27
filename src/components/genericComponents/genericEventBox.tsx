@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Popover from 'react-native-popover-view'
 import ParticipantsBox from '../genericComponents/genericParticipantsBox'
+import generalStyle from '../../styles/generalStyle'
 
 function datesDiff(date1: Date, dateNow: number) {
     const diffMs = date1.getTime() - dateNow
@@ -60,7 +61,7 @@ export default class EventBox extends React.Component<EventBoxProps> {
                             style={styles.gameTypeIcon}
                             name={this.props.gameType}
                             size={30}
-                            color="black"
+                            color={generalStyle.GENERAL.BOX.ICON_COLOR}
                         />
                         <View style={styles.info}>
                             <View style={styles.infoLeft}>
@@ -74,9 +75,9 @@ export default class EventBox extends React.Component<EventBoxProps> {
                                         style={styles.marker}
                                         name="map-marker"
                                         size={15}
-                                        color="black"
+                                        color={generalStyle.GENERAL.BOX.MARKER_COLOR}
                                     />
-                                    <Text>
+                                    <Text style={styles.address}>
                                         {this.props.location.addressTitle}
                                     </Text>
                                 </View>
@@ -100,7 +101,7 @@ export default class EventBox extends React.Component<EventBoxProps> {
                                 style={styles.gameTypeIcon}
                                 name="subdirectory-arrow-right"
                                 size={30}
-                                color="gray"
+                                color={generalStyle.GENERAL.BOX.ARROW_COLOR}
                             />
                         </View>
                     </View>
@@ -133,30 +134,31 @@ const styles = StyleSheet.create({
         height: 56,
         alignItems: 'center',
         marginRight: 10,
-        marginLeft: 10
+        marginLeft: 10,
+        backgroundColor: generalStyle.GENERAL.BOX.MAIN_BACKGROUND_COLOR
     },
     locationContainer: {
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     info: {
         maxHeight: 40,
         flexDirection: 'row',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'space-between',
-        flex: 6
+        flex: 6,
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
     },
     infoLeft: {
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-around'
+        alignItems: 'flex-start',
     },
     infoRight: {
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'space-around'
+        alignItems: 'flex-start',
     },
     title: {
-        marginBottom: 5
+        marginBottom: 5,
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
     },
     marker: {},
     gameTypeIcon: {
@@ -168,8 +170,15 @@ const styles = StyleSheet.create({
         flex: 1
     },
     popover: {},
-    approve: {},
+
+    approve: {
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
+    },
     time: {
-        marginBottom: 5
+        marginBottom: 5,
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
+    },
+    address: {
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
     }
 })

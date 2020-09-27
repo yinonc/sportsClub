@@ -16,6 +16,7 @@ import LoginScreen from './screens/loginScreen'
 import constants from '../constants'
 import { AppState } from '../appState/appInitialState'
 import { createStackNavigator } from '@react-navigation/stack'
+import generalStyle from '../styles/generalStyle'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -74,9 +75,13 @@ class ScreensContainerPure extends React.Component<ScreensContainerStateProps> {
                     }
                 })}
                 tabBarOptions={{
-                    activeTintColor: 'tomato',
-                    inactiveTintColor: 'gray',
-                    labelStyle: { fontSize: 9 }
+                    activeTintColor: generalStyle.BOTTOM.BAR_ICONS_ACTIVE,
+                    inactiveTintColor: generalStyle.BOTTOM.BAR_ICONS_INACTIVE,
+                    labelStyle: {
+                        fontSize: generalStyle.BOTTOM.LABEL.FONT_SIZE
+                    },
+                    activeBackgroundColor: generalStyle.BOTTOM.BAR_COLOR,
+                    inactiveBackgroundColor: generalStyle.BOTTOM.BAR_COLOR
                 }}
             >
                 <Tab.Screen

@@ -6,6 +6,7 @@ import { UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import GroupBox from '../genericComponents/genericGroupBox'
 import { getGroupsData } from '../../../mocks/userData'
+import generalStyle from '../../styles/generalStyle'
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -68,7 +69,10 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                                             key={game}
                                             name={game}
                                             size={20}
-                                            color="black"
+                                            color={
+                                                generalStyle.GENERAL.BOX
+                                                    .ICON_COLOR
+                                            }
                                         />
                                     ))}
                             </View>
@@ -84,7 +88,7 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                         <MaterialCommunityIcons
                             name="account-group"
                             size={20}
-                            color="gray"
+                            color={generalStyle.GENERAL.MAIN_ICON_COLOR}
                             style={{ marginRight: 5, marginTop: 3 }}
                         />
                         <Text style={styles.groupsHeaderName}>Groups:</Text>
@@ -115,16 +119,13 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: generalStyle.GENERAL.MAIN_BACKGROUND_COLOR
     },
     header: {
-        flex: 1,
-        paddingTop: 20,
-        backgroundColor: '#00BFFF'
+        paddingTop: 70
     },
     headerContent: {
-        padding: 30,
         alignItems: 'center'
     },
     avatar: {
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     body: {
-        flex: 2,
         alignItems: 'center',
         padding: 5,
         flexDirection: 'column'
@@ -161,8 +161,10 @@ const styles = StyleSheet.create({
     boxesWrapper: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignSelf: 'stretch',
-        justifyContent: 'space-around'
+        width: '95%',
+        justifyContent: 'space-around',
+        backgroundColor: generalStyle.GENERAL.BOX.MAIN_BACKGROUND_COLOR,
+        borderRadius: 10
     },
     favoriteGameWrapper: {
         flexDirection: 'row'
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
     ageName: {
         marginRight: 5,
         fontSize: 22,
-        color: 'gray',
+        color: generalStyle.GENERAL.MAIN_TEXT_COLOR,
         fontWeight: '600'
     },
     groupsHeader: {
@@ -200,12 +202,12 @@ const styles = StyleSheet.create({
     groupsHeaderName: {
         marginRight: 5,
         fontSize: 22,
-        color: 'gray',
+        color: generalStyle.GENERAL.MAIN_TEXT_COLOR,
         fontWeight: '600'
     },
     info: {
         fontSize: 18,
-        color: '#696969'
+        color: generalStyle.GENERAL.BOX.MAIN_TEXT_COLOR
     },
     groupsListContainer: {
         alignSelf: 'stretch'

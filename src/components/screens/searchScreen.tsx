@@ -13,6 +13,7 @@ import { getMockEvents } from '../../../mocks/events'
 import EventBox from '../genericComponents/genericEventBox'
 import constants from '../../constants'
 import { getUserDataById, getParticipantsData } from '../../userUtils'
+import generalStyle from '../../styles/generalStyle'
 type EventsFilter = 'EVENTS' | 'GROUPS' | 'PROFILES'
 
 interface SearchScreenProps {
@@ -133,19 +134,19 @@ export default class SearchScreen extends React.Component<
                                         <View>
                                             <MaterialCommunityIcons
                                                 name={filterData.icon}
-                                                size={30}
+                                                size={generalStyle.GENERAL.SEARCH.FILTERS.ICON_SIZE}
                                                 color={
                                                     itemInFilters
-                                                        ? 'gray'
-                                                        : '#FFFFFF'
+                                                        ? generalStyle.GENERAL.SEARCH.FILTERS.ICON_COLOR_ACTIVE
+                                                        : generalStyle.GENERAL.SEARCH.FILTERS.ICON_COLOR_INACTIVE
                                                 }
                                                 style={{ alignSelf: 'center' }}
                                             />
                                             <Text
                                                 style={
                                                     itemInFilters
-                                                        ? styles.filterTextGray
-                                                        : styles.filterText
+                                                        ? styles.filterTextActive
+                                                        : styles.filterTextInactive
                                                 }
                                             >
                                                 {filterData.text}
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
         flex: 2,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#00BFFF'
+        backgroundColor: generalStyle.GENERAL.MAIN_BACKGROUND_COLOR
     },
     headerText: {
         color: 'white',
@@ -209,14 +210,15 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     filter: {},
-    filterText: {
-        color: 'white'
+    filterTextActive: {
+        color: generalStyle.GENERAL.SEARCH.FILTERS.LABEL_COLOR_ACTIVE
     },
-    filterTextGray: {
-        color: 'gray'
+    filterTextInactive: {
+        color: generalStyle.GENERAL.SEARCH.FILTERS.LABEL_COLOR_INACTIVE
     },
     content: {
-        flex: 6
+        flex: 6,
+        backgroundColor: generalStyle.GENERAL.MAIN_BACKGROUND_COLOR
     },
     eventsListContainer: {}
 })
