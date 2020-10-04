@@ -5,7 +5,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { connect } from 'react-redux'
 
 import LocationsScreen from './screens/locationsScreen'
-import EventsScreen from './screens/eventScreen'
+import EventsScreen from './screens/eventsScreen'
 import NotificationsScreen from './screens/notificationsScreen'
 import SearchScreen from './screens/searchScreen'
 import ProfileScreen from './screens/profileScreen'

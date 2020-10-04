@@ -75,7 +75,10 @@ export default class EventBox extends React.Component<EventBoxProps> {
                                         style={styles.marker}
                                         name="map-marker"
                                         size={15}
-                                        color={generalStyle.GENERAL.BOX.MARKER_COLOR}
+                                        color={
+                                            generalStyle.GENERAL.BOX
+                                                .MARKER_COLOR
+                                        }
                                     />
                                     <Text style={styles.address}>
                                         {this.props.location.addressTitle}
@@ -138,7 +141,7 @@ const styles = StyleSheet.create({
         backgroundColor: generalStyle.GENERAL.BOX.MAIN_BACKGROUND_COLOR
     },
     locationContainer: {
-        flexDirection: 'row',
+        flexDirection: 'row'
     },
     info: {
         maxHeight: 40,
@@ -150,11 +153,11 @@ const styles = StyleSheet.create({
     },
     infoLeft: {
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     },
     infoRight: {
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     },
     title: {
         marginBottom: 5,

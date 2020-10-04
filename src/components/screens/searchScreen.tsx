@@ -134,11 +134,18 @@ export default class SearchScreen extends React.Component<
                                         <View>
                                             <MaterialCommunityIcons
                                                 name={filterData.icon}
-                                                size={generalStyle.GENERAL.SEARCH.FILTERS.ICON_SIZE}
+                                                size={
+                                                    generalStyle.GENERAL.SEARCH
+                                                        .FILTERS.ICON_SIZE
+                                                }
                                                 color={
                                                     itemInFilters
-                                                        ? generalStyle.GENERAL.SEARCH.FILTERS.ICON_COLOR_ACTIVE
-                                                        : generalStyle.GENERAL.SEARCH.FILTERS.ICON_COLOR_INACTIVE
+                                                        ? generalStyle.GENERAL
+                                                              .SEARCH.FILTERS
+                                                              .ICON_COLOR_ACTIVE
+                                                        : generalStyle.GENERAL
+                                                              .SEARCH.FILTERS
+                                                              .ICON_COLOR_INACTIVE
                                                 }
                                                 style={{ alignSelf: 'center' }}
                                             />

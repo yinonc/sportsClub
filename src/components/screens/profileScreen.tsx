@@ -1,5 +1,13 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    ScrollView,
+    TouchableHighlight,
+    Dimensions
+} from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
 import { UserData } from '../../../schemas'
@@ -7,6 +15,8 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import GroupBox from '../genericComponents/genericGroupBox'
 import { getGroupsData } from '../../../mocks/userData'
 import generalStyle from '../../styles/generalStyle'
+import Popover, { Rect } from 'react-native-popover-view'
+import SettingsPopover from '../genericComponents/settingsPopover'
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -18,11 +28,48 @@ function calculateAge(date: Date): number {
     return Math.abs(ageDate.getUTCFullYear() - 1970)
 }
 
-class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
+interface ProfileScreenState {
+    showSettingsMenu: boolean
+    popoverWidth: number
+}
+
+class ProfileScreenPure extends React.Component<
+    ProfileScreenStateProps,
+    ProfileScreenState
+> {
+    state = { showSettingsMenu: false, popoverWidth: 200 }
+    profileScreenRef = null
+    toggleSettingsMenu = () => {
+        this.setState({ showSettingsMenu: !this.state.showSettingsMenu })
+    }
+
     render() {
         return (
-            <View style={styles.container}>
+            <View
+                style={styles.container}
+                ref={(ref) => (this.profileScreenRef = ref)}
+                onLayout={(event) => {
+                    this.setState({
+                        popoverWidth: event.nativeEvent.layout.width
+                    })
+                }}
+            >
+                <Popover
+                    placement={'bottom'}
+                    isVisible={this.state.showSettingsMenu}
+                    fromView={this.profileScreenRef}
+                    onRequestClose={() => this.toggleSettingsMenu()}
+                >
+                    <SettingsPopover width={this.state.popoverWidth} />
+                </Popover>
                 <View style={styles.header}>
+                    <View style={styles.headerLeftItem}>
+                        <MaterialCommunityIcons
+                            name="format-list-bulleted"
+                            size={20}
+                            color="#FFFFFF"
+                        />
+                    </View>
                     <View style={styles.headerContent}>
                         <Image
                             style={styles.avatar}
@@ -41,6 +88,15 @@ class ProfileScreenPure extends React.Component<ProfileScreenStateProps> {
                             />
                             <Text style={styles.locationText}>Tel Aviv</Text>
                         </View>
+                    </View>
+                    <View style={styles.headerRightItem}>
+                        <TouchableHighlight onPress={this.toggleSettingsMenu}>
+                            <MaterialCommunityIcons
+                                name="format-list-bulleted"
+                                size={30}
+                                color="#FFFFFF"
+                            />
+                        </TouchableHighlight>
                     </View>
                 </View>
 
@@ -123,8 +179,19 @@ const styles = StyleSheet.create({
         backgroundColor: generalStyle.GENERAL.MAIN_BACKGROUND_COLOR
     },
     header: {
-        paddingTop: 70
+        display: 'flex',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        paddingTop: 70,
+        marginRight: 12,
+        marginLeft: 12
     },
+    headerLeftItem: {
+        // Next two are temp hack for aligning header content
+        width: 40,
+        opacity: 0
+    },
+    headerRightItem: {},
     headerContent: {
         alignItems: 'center'
     },
