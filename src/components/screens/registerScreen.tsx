@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Input, CheckBox } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
 
-function formatDate(): string {
+function getCurrentDate(): string {
     let d = new Date(),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -18,6 +18,12 @@ function formatDate(): string {
 interface RegisterScreenProps {}
 
 interface RegisterScreenState {
+    userName: string
+    email: string
+    password: string
+    rePassword: string
+    nationality: string
+    dateOfBirth: string
     date: string
     termsChecked: boolean
 }
@@ -26,11 +32,31 @@ export default class RegisterScreen extends React.Component<
     RegisterScreenProps,
     RegisterScreenState
 > {
-    state = {
-        date: formatDate(),
-        termsChecked: false
+    constructor(props) {
+        super(props)
+        const currentDate = getCurrentDate()
+        this.state = {
+            userName: '',
+            email: '',
+            password: '',
+            rePassword: '',
+            nationality: '',
+            dateOfBirth: currentDate,
+            date: currentDate,
+            termsChecked: false
+        }
     }
-    handleRegister = () => {}
+    allInputsValid = (): boolean => {
+        return false
+    }
+    handleRegister = () => {
+        console.log(this.state)
+        if (this.allInputsValid()) {
+            // post('url', {body: {}})
+        } else {
+            // Error to the user
+        }
+    }
 
     render() {
         return (
@@ -40,26 +66,37 @@ export default class RegisterScreen extends React.Component<
                         containerStyle={styles.generalInput}
                         placeholder="Nationality"
                         label="Nationality"
+                        onChangeText={(nationality) =>
+                            this.setState({ nationality })
+                        }
                     />
                     <Input
                         containerStyle={styles.generalInput}
                         placeholder="UserName"
                         label="Username"
+                        onChangeText={(userName) => this.setState({ userName })}
                     />
                     <Input
                         containerStyle={styles.generalInput}
                         placeholder="Password"
                         label="Password"
+                        secureTextEntry={true}
+                        onChangeText={(password) => this.setState({ password })}
                     />
                     <Input
                         containerStyle={styles.generalInput}
                         placeholder="Re-Password"
                         label="Re-Password"
+                        secureTextEntry={true}
+                        onChangeText={(rePassword) =>
+                            this.setState({ rePassword })
+                        }
                     />
                     <Input
                         containerStyle={styles.generalInput}
                         placeholder="Email"
                         label="Email"
+                        onChangeText={(email) => this.setState({ email })}
                     />
                     <View style={styles.datePickerWrapper}>
                         <Text style={styles.datePickerText}>
@@ -75,6 +112,9 @@ export default class RegisterScreen extends React.Component<
                             maxDate={this.state.date}
                             confirmBtnText="Confirm"
                             cancelBtnText="Cancel"
+                            onChange={(dateOfBirth) =>
+                                this.setState({ dateOfBirth })
+                            }
                             customStyles={{
                                 dateIcon: {
                                     position: 'absolute',
