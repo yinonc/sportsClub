@@ -44,5 +44,8 @@ export default {
             name: 'EVENT',
             symbolName: 'view-list'
         }
+    },
+    ERROR_CODES: {
+        NOT_FOUND_BY_EMAIL: 1000
     }
 }

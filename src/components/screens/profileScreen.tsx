@@ -22,7 +22,10 @@ interface ProfileScreenStateProps {
     userData: UserData
 }
 
-function calculateAge(date: Date): number {
+//https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10221941940800653&height=50&width=50&ext=1612802960&hash=AeQXs53qppd0dhY05ps
+
+function calculateAge(dateString: string): number {
+    const date = new Date(dateString)
     const ageDifMs = Date.now() - date.getTime()
     const ageDate = new Date(ageDifMs)
     return Math.abs(ageDate.getUTCFullYear() - 1970)

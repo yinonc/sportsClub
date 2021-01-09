@@ -18,7 +18,7 @@ export interface UserData {
     firstName: string
     lastName: string
     nickName: string
-    dateOfBirth: Date
+    dateOfBirth: string
     rate: number
     profileImage: string
     favoriteGames: GameType[]

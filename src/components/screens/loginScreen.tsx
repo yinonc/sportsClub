@@ -9,7 +9,12 @@ import { getMockUserData } from '../../../mocks/userData'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { SocialIcon, Input } from 'react-native-elements'
 import constants from '../../constants'
-import { registerUser } from '../../userUtils'
+import {
+    registerUser,
+    getUserByMail,
+    DEFAULT_USER_REGION
+} from '../../userUtils'
+import * as Crypto from 'expo-crypto'
 
 interface LoginScreenProps {
     setUserData(userData: UserData): void
@@ -84,23 +89,29 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                 `https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`
             )
             const resJson = (await response.json()) as FacebookUserData
-            registerUser({
-                firstName: resJson.first_name,
-                lastName: resJson.last_name,
-                email: resJson.email,
-                nickName: resJson.first_name,
-                profilePicture: resJson.picture.data.url,
-                dateOfBirth: getDateOfBirthFromFacebookBirthDay(
-                    resJson.birthday
-                ),
-                password: '',
-                region: '',
-                userName: resJson.email
-            }).then((userData) => {
-                this.props.setUserData(userData)
-            })
+
+            let userData = await getUserByMail(resJson.email)
+            if (!userData) {
+                const passwordFromEmail = await Crypto.digestStringAsync(
+                    Crypto.CryptoDigestAlgorithm.SHA256,
+                    resJson.email
+                )
+                userData = await registerUser({
+                    email: resJson.email,
+                    region: DEFAULT_USER_REGION,
+                    password: passwordFromEmail,
+                    lastName: resJson.last_name,
+                    nickName: resJson.first_name,
+                    firstName: resJson.first_name,
+                    profilePicture: resJson.picture.data.url,
+                    dateOfBirth: getDateOfBirthFromFacebookBirthDay(
+                        resJson.birthday
+                    )
+                })
+            }
+            this.props.setUserData(userData)
         } else {
-            console.log('failed to get ')
+            console.log('Failed to get from Facebook')
         }
     }
 

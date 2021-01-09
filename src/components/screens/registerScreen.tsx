@@ -5,20 +5,21 @@ import DatePicker from 'react-native-datepicker'
 import { connect } from 'react-redux'
 import { Dropdown } from 'react-native-material-dropdown'
 import {
-    UserInputFields,
+    registerUser,
     UserInputField,
-    userFieldsValidations,
-    registerUser
+    UserInputFields,
+    DEFAULT_USER_REGION,
+    userFieldsValidations
 } from '../../userUtils'
 import { AppState } from '../../appState/appInitialState'
 import { getUserDataAction } from '../../appState/stateActions'
 import { UserData } from '../../../schemas'
 
 export const userInputsData: UserInputField[] = [
-    { key: 'userName', placeholder: 'Username' },
+    { key: 'email', placeholder: 'Email' },
     { key: 'password', placeholder: 'Password' },
     { key: 'rePassword', placeholder: 'RePassword' },
-    { key: 'email', placeholder: 'Email' }
+    { key: 'nickname', placeholder: 'Nickname' }
 ]
 
 const securedInputs = new Set<UserInputFields>(['password', 'rePassword'])
@@ -37,22 +38,28 @@ function getCurrentDate(): string {
 
 const countriesData = [
     {
-        value: 'Israel'
+        value: 'Israel',
+        locale: 'il'
     },
     {
-        value: 'USA'
+        value: 'USA',
+        locale: 'en'
     },
     {
-        value: 'France'
+        value: 'France',
+        locale: 'fr'
     },
     {
-        value: 'Germany'
+        value: 'Germany',
+        locale: 'de'
     },
     {
-        value: 'Italy'
+        value: 'Italy',
+        locale: 'it'
     },
     {
-        value: 'Spain'
+        value: 'Spain',
+        locale: 'es'
     }
 ]
 
@@ -65,13 +72,13 @@ export type InvalidMessages = {
 }
 
 export interface RegisterScreenState {
-    userName: string
-    email: string
-    password: string
-    rePassword: string
-    region: string
-    dateOfBirth: string
     date: string
+    email: string
+    region: string
+    password: string
+    nickname: string
+    rePassword: string
+    dateOfBirth: string
     termsChecked: boolean
     invalidMessages: InvalidMessages
 }
@@ -84,11 +91,11 @@ class RegisterScreenPure extends React.Component<
         super(props)
         const currentDate = getCurrentDate()
         this.state = {
-            userName: '',
+            nickname: '',
             email: '',
             password: '',
             rePassword: '',
-            region: countriesData[0].value,
+            region: DEFAULT_USER_REGION,
             dateOfBirth: currentDate,
             date: currentDate,
             termsChecked: false,
