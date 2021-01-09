@@ -2,6 +2,13 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Input, CheckBox } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
+import { Dropdown } from 'react-native-material-dropdown'
+import {
+    UserInputFields,
+    userInputsData,
+    UserInputField,
+    userFieldsValidations, securedInputs
+} from '../../userUtils'
 
 function getCurrentDate(): string {
     let d = new Date(),
@@ -15,9 +22,34 @@ function getCurrentDate(): string {
     return [year, month, day].join('-')
 }
 
+const countriesData = [
+    {
+        value: 'Israel'
+    },
+    {
+        value: 'USA'
+    },
+    {
+        value: 'France'
+    },
+    {
+        value: 'Germany'
+    },
+    {
+        value: 'Italy'
+    },
+    {
+        value: 'Spain'
+    }
+]
+
 interface RegisterScreenProps {}
 
-interface RegisterScreenState {
+export type InvalidMessages = {
+    [key in UserInputFields]?: string
+}
+
+export interface RegisterScreenState {
     userName: string
     email: string
     password: string
@@ -26,6 +58,7 @@ interface RegisterScreenState {
     dateOfBirth: string
     date: string
     termsChecked: boolean
+    invalidMessages: InvalidMessages
 }
 
 export default class RegisterScreen extends React.Component<
@@ -40,63 +73,74 @@ export default class RegisterScreen extends React.Component<
             email: '',
             password: '',
             rePassword: '',
-            nationality: '',
+            nationality: countriesData[0].value,
             dateOfBirth: currentDate,
             date: currentDate,
-            termsChecked: false
+            termsChecked: false,
+            invalidMessages: {}
         }
     }
     allInputsValid = (): boolean => {
         return false
     }
+
+    highlightInvalidInputs = () => {
+        const { invalidMessages } = this.state
+        userInputsData.forEach(({ key }) => {
+            invalidMessages[key] = userFieldsValidations[key](this.state)
+        })
+        this.setState({ invalidMessages })
+    }
+
     handleRegister = () => {
         console.log(this.state)
         if (this.allInputsValid()) {
             // post('url', {body: {}})
         } else {
-            // Error to the user
+            this.highlightInvalidInputs()
         }
+    }
+
+    onInputBlur = (key: UserInputFields) => {
+        const { invalidMessages } = this.state
+        invalidMessages[key] = userFieldsValidations[key](this.state)
+        this.setState({ invalidMessages })
+    }
+
+    onUserInputFieldChange = (key: UserInputFields, value: string) => {
+        const currentState = {...this.state}
+        currentState[key] = value
+        this.setState(currentState)
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.registerForm}>
-                    <Input
-                        containerStyle={styles.generalInput}
-                        placeholder="Nationality"
+                    {userInputsData.map(
+                        ({ key, placeholder }: UserInputField) => (
+                            <Input
+                                key={key}
+                                placeholder={placeholder}
+                                label={placeholder}
+                                onBlur={() => this.onInputBlur(key)}
+                                onChangeText={(value) => this.onUserInputFieldChange(key, value)}
+                                containerStyle={styles.generalInput}
+                                secureTextEntry={securedInputs.has(key)}
+                                renderErrorMessage={!!this.state.invalidMessages[key]}
+                                errorStyle={styles.generalInputInvalid}
+                                errorMessage={this.state.invalidMessages[key]}
+                            />
+                        )
+                    )}
+                    <Dropdown
                         label="Nationality"
+                        value={this.state.nationality}
+                        data={countriesData}
+                        containerStyle={styles.dropDownStyle}
                         onChangeText={(nationality) =>
                             this.setState({ nationality })
                         }
-                    />
-                    <Input
-                        containerStyle={styles.generalInput}
-                        placeholder="UserName"
-                        label="Username"
-                        onChangeText={(userName) => this.setState({ userName })}
-                    />
-                    <Input
-                        containerStyle={styles.generalInput}
-                        placeholder="Password"
-                        label="Password"
-                        secureTextEntry={true}
-                        onChangeText={(password) => this.setState({ password })}
-                    />
-                    <Input
-                        containerStyle={styles.generalInput}
-                        placeholder="Re-Password"
-                        label="Re-Password"
-                        secureTextEntry={true}
-                        onChangeText={(rePassword) =>
-                            this.setState({ rePassword })
-                        }
-                    />
-                    <Input
-                        containerStyle={styles.generalInput}
-                        placeholder="Email"
-                        label="Email"
-                        onChangeText={(email) => this.setState({ email })}
                     />
                     <View style={styles.datePickerWrapper}>
                         <Text style={styles.datePickerText}>
@@ -199,6 +243,14 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     generalInput: {},
+    generalInputInvalid: {
+        color: 'red'
+    },
+    dropDownStyle: {
+        alignSelf: 'stretch',
+        paddingLeft: 10,
+        paddingRight: 10
+    },
     inputIcon: {
         marginRight: 10
     },
