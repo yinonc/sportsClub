@@ -19,12 +19,13 @@ export interface UserData {
     lastName: string
     nickName: string
     dateOfBirth: Date
-    rate: number // Think about it
+    rate: number
     profileImage: string
     favoriteGames: GameType[]
     email?: string
     friends: userId[]
     gamesPlayed: number
+    region: string
 }
 
 export interface Group {

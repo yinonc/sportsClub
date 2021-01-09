@@ -140,7 +140,7 @@ export default class RegisterScreen extends React.Component<
                         )
                     )}
                     <Dropdown
-                        label="Nationality"
+                        label="Region"
                         value={this.state.nationality}
                         data={countriesData}
                         containerStyle={styles.dropDownStyle}
