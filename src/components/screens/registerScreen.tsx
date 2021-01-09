@@ -7,7 +7,8 @@ import {
     UserInputFields,
     userInputsData,
     UserInputField,
-    userFieldsValidations, securedInputs
+    userFieldsValidations,
+    securedInputs
 } from '../../userUtils'
 
 function getCurrentDate(): string {
@@ -108,7 +109,7 @@ export default class RegisterScreen extends React.Component<
     }
 
     onUserInputFieldChange = (key: UserInputFields, value: string) => {
-        const currentState = {...this.state}
+        const currentState = { ...this.state }
         currentState[key] = value
         this.setState(currentState)
     }
@@ -124,10 +125,14 @@ export default class RegisterScreen extends React.Component<
                                 placeholder={placeholder}
                                 label={placeholder}
                                 onBlur={() => this.onInputBlur(key)}
-                                onChangeText={(value) => this.onUserInputFieldChange(key, value)}
+                                onChangeText={(value) =>
+                                    this.onUserInputFieldChange(key, value)
+                                }
                                 containerStyle={styles.generalInput}
                                 secureTextEntry={securedInputs.has(key)}
-                                renderErrorMessage={!!this.state.invalidMessages[key]}
+                                renderErrorMessage={
+                                    !!this.state.invalidMessages[key]
+                                }
                                 errorStyle={styles.generalInputInvalid}
                                 errorMessage={this.state.invalidMessages[key]}
                             />
