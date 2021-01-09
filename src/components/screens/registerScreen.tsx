@@ -2,14 +2,26 @@ import React from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { Input, CheckBox } from 'react-native-elements'
 import DatePicker from 'react-native-datepicker'
+import { connect } from 'react-redux'
 import { Dropdown } from 'react-native-material-dropdown'
 import {
     UserInputFields,
-    userInputsData,
     UserInputField,
     userFieldsValidations,
-    securedInputs
+    registerUser
 } from '../../userUtils'
+import { AppState } from '../../appState/appInitialState'
+import { getUserDataAction } from '../../appState/stateActions'
+import { UserData } from '../../../schemas'
+
+export const userInputsData: UserInputField[] = [
+    { key: 'userName', placeholder: 'Username' },
+    { key: 'password', placeholder: 'Password' },
+    { key: 'rePassword', placeholder: 'RePassword' },
+    { key: 'email', placeholder: 'Email' }
+]
+
+const securedInputs = new Set<UserInputFields>(['password', 'rePassword'])
 
 function getCurrentDate(): string {
     let d = new Date(),
@@ -44,7 +56,9 @@ const countriesData = [
     }
 ]
 
-interface RegisterScreenProps {}
+interface RegisterScreenProps {
+    setUserData(userData: UserData): void
+}
 
 export type InvalidMessages = {
     [key in UserInputFields]?: string
@@ -55,14 +69,14 @@ export interface RegisterScreenState {
     email: string
     password: string
     rePassword: string
-    nationality: string
+    region: string
     dateOfBirth: string
     date: string
     termsChecked: boolean
     invalidMessages: InvalidMessages
 }
 
-export default class RegisterScreen extends React.Component<
+class RegisterScreenPure extends React.Component<
     RegisterScreenProps,
     RegisterScreenState
 > {
@@ -74,7 +88,7 @@ export default class RegisterScreen extends React.Component<
             email: '',
             password: '',
             rePassword: '',
-            nationality: countriesData[0].value,
+            region: countriesData[0].value,
             dateOfBirth: currentDate,
             date: currentDate,
             termsChecked: false,
@@ -82,7 +96,9 @@ export default class RegisterScreen extends React.Component<
         }
     }
     allInputsValid = (): boolean => {
-        return false
+        return userInputsData.every(
+            ({ key }) => !userFieldsValidations[key](this.state)
+        )
     }
 
     highlightInvalidInputs = () => {
@@ -94,9 +110,10 @@ export default class RegisterScreen extends React.Component<
     }
 
     handleRegister = () => {
-        console.log(this.state)
         if (this.allInputsValid()) {
-            // post('url', {body: {}})
+            registerUser(this.state).then((userData: UserData) => {
+                this.props.setUserData(userData)
+            })
         } else {
             this.highlightInvalidInputs()
         }
@@ -141,12 +158,10 @@ export default class RegisterScreen extends React.Component<
                     )}
                     <Dropdown
                         label="Region"
-                        value={this.state.nationality}
+                        value={this.state.region}
                         data={countriesData}
                         containerStyle={styles.dropDownStyle}
-                        onChangeText={(nationality) =>
-                            this.setState({ nationality })
-                        }
+                        onChangeText={(region) => this.setState({ region })}
                     />
                     <View style={styles.datePickerWrapper}>
                         <Text style={styles.datePickerText}>
@@ -213,6 +228,14 @@ export default class RegisterScreen extends React.Component<
         )
     }
 }
+
+const mapStateToProps = (state: AppState) => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+    setUserData: (userData) => dispatch(getUserDataAction(userData))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterScreenPure)
 
 const styles = StyleSheet.create({
     container: {

@@ -9,6 +9,7 @@ import { getMockUserData } from '../../../mocks/userData'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { SocialIcon, Input } from 'react-native-elements'
 import constants from '../../constants'
+import { registerUser } from '../../userUtils'
 
 interface LoginScreenProps {
     setUserData(userData: UserData): void
@@ -83,22 +84,21 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                 `https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`
             )
             const resJson = (await response.json()) as FacebookUserData
-            const userData: UserData = {
+            registerUser({
                 firstName: resJson.first_name,
                 lastName: resJson.last_name,
                 email: resJson.email,
                 nickName: resJson.first_name,
-                profileImage: resJson.picture.data.url,
+                profilePicture: resJson.picture.data.url,
                 dateOfBirth: getDateOfBirthFromFacebookBirthDay(
                     resJson.birthday
                 ),
-                rate: 8.7,
-                gamesPlayed: 102,
-                favoriteGames: ['soccer', 'basketball'],
-                id: '10',
-                friends: []
-            }
-            this.props.setUserData(userData)
+                password: '',
+                region: '',
+                userName: resJson.email
+            }).then((userData) => {
+                this.props.setUserData(userData)
+            })
         } else {
             console.log('failed to get ')
         }

@@ -24,18 +24,6 @@ export interface UserInputField {
     placeholder: string
 }
 
-export const securedInputs = new Set<UserInputFields>([
-    'password',
-    'rePassword'
-])
-
-export const userInputsData: UserInputField[] = [
-    { key: 'userName', placeholder: 'Username' },
-    { key: 'password', placeholder: 'Password' },
-    { key: 'rePassword', placeholder: 'RePassword' },
-    { key: 'email', placeholder: 'Email' }
-]
-
 export const userFieldsValidations: {
     [key in UserInputFields]: (state: RegisterScreenState) => string
 } = {
@@ -75,4 +63,39 @@ export const userFieldsValidations: {
         }
         return ''
     }
+}
+
+export const registerUser = ({
+    dateOfBirth,
+    email,
+    password,
+    userName,
+    region,
+    profilePicture = '',
+    firstName = '',
+    lastName = '',
+    nickName = ''
+}): Promise<UserData> => {
+    return fetch('http://3.15.221.85:8082/api/users', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            dateOfBirth,
+            email,
+            firstName,
+            lastName,
+            nickName,
+            password,
+            profilePicture,
+            userName,
+            region
+        })
+    })
+        .then((x) => x.json())
+        .catch((e) => {
+            console.log(e)
+        })
 }
