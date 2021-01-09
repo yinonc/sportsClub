@@ -120,6 +120,7 @@ export default class RegisterScreen extends React.Component<
                 <View style={styles.registerForm}>
                     {userInputsData.map(
                         ({ key, placeholder }: UserInputField) => (
+                            // @ts-ignore
                             <Input
                                 key={key}
                                 placeholder={placeholder}
