@@ -86,7 +86,7 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
         if (type === 'success') {
             // Get the user's name using Facebook's Graph API
             const response = await fetch(
-                `https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture&access_token=${token}`
+                `https://graph.facebook.com/me?fields=birthday,email,first_name,last_name,picture.type(large)&access_token=${token}`
             )
             const resJson = (await response.json()) as FacebookUserData
 
