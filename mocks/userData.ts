@@ -8,7 +8,7 @@ export function getMockUserData(): UserData {
 export function getAllMockUsers(): UserData[] {
     return [
         {
-            profileImage:
+            profilePicture:
                 'https://scontent.fhfa1-1.fna.fbcdn.net/v/t1.0-9/82181983_10220991409917975_2722998403691708416_n.jpg?_nc_cat=110&_nc_sid=09cbfe&_nc_ohc=KqIDl4sfKM8AX-W-kIo&_nc_ht=scontent.fhfa1-1.fna&oh=72943a1bb4e9e5c70553687c96f20f74&oe=5F93B5BA',
             rate: 8.7,
             id: '1',
@@ -23,7 +23,7 @@ export function getAllMockUsers(): UserData[] {
             favoriteGames: ['soccer', 'basketball']
         },
         {
-            profileImage:
+            profilePicture:
                 'https://instagram.fhfa1-2.fna.fbcdn.net/v/t51.2885-19/s320x320/91678577_1181080608898119_1029039611109703680_n.jpg?_nc_ht=instagram.fhfa1-2.fna.fbcdn.net&_nc_ohc=lLxI9SYf9qIAX_27idW&oh=c23c05a63bfda4491986910a68f23793&oe=5F95A729',
             rate: 8.8,
             id: '2',
@@ -38,7 +38,7 @@ export function getAllMockUsers(): UserData[] {
             favoriteGames: ['soccer', 'basketball']
         },
         {
-            profileImage:
+            profilePicture:
                 'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/90877461_10219270495211580_1610044773819744256_n.jpg?_nc_cat=105&_nc_sid=09cbfe&_nc_ohc=iuLwl-ROShMAX8LdL1z&_nc_ht=scontent.fhfa1-2.fna&oh=0f8707667db0f8a1ef09124b09541f70&oe=5F952BD7',
             rate: 9.2,
             id: '3',
@@ -53,7 +53,7 @@ export function getAllMockUsers(): UserData[] {
             favoriteGames: ['soccer', 'basketball']
         },
         {
-            profileImage:
+            profilePicture:
                 'https://instagram.fhfa1-2.fna.fbcdn.net/v/t51.2885-19/s320x320/56905173_2232296596864973_8253886163098533888_n.jpg?_nc_ht=instagram.fhfa1-2.fna.fbcdn.net&_nc_ohc=LecCDP_PbK0AX-kT4xJ&oh=486accab543355bf3a21e37cfc7e3be3&oe=5F9767BF',
             rate: 8.3,
             id: '4',
@@ -68,7 +68,7 @@ export function getAllMockUsers(): UserData[] {
             favoriteGames: ['soccer', 'basketball']
         },
         {
-            profileImage:
+            profilePicture:
                 'https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/46516775_10156716297985690_1188493196846432256_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=0q38P7xPFU4AX_MF0Q4&_nc_ht=scontent.fhfa1-2.fna&oh=bb1743e24b4e01890fc9a141e2bf905a&oe=5F920455',
             rate: 8.3,
             id: '5',

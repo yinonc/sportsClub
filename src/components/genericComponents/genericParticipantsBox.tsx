@@ -53,7 +53,7 @@ export default class ParticipantsBox extends React.Component<
                         >
                             <View style={styles.participantImageWrapper}>
                                 <Image
-                                    source={{ uri: participant.profileImage }}
+                                    source={{ uri: participant.profilePicture }}
                                     style={styles.participantImage}
                                 />
                             </View>

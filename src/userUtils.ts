@@ -17,7 +17,7 @@ export const getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
 
 export const DEFAULT_USER_REGION = 'en'
 
-const userNameRegex = new RegExp(/[a-zA-Z0-9]{6,12}/)
+const nickNameRegex = new RegExp(/[a-zA-Z0-9]{6,12}/)
 const emailRegex = new RegExp(/^[\w.\-]+@[\w.\-]+\.[A-Za-z]{2,3}$/)
 
 export type UserInputFields = 'nickname' | 'password' | 'rePassword' | 'email'
@@ -37,8 +37,8 @@ export const userFieldsValidations: {
         if (nickname.length < 2 || nickname.length > 20) {
             return 'Username must be between 2 and 20 length'
         }
-        if (!userNameRegex.test(nickname)) {
-            return 'Username must be letters and numbers only'
+        if (!nickNameRegex.test(nickname)) {
+            return 'Nickname must be letters and numbers only'
         }
         return ''
     },

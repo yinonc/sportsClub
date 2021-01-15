@@ -39,7 +39,7 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                     {participantsData.map((participant) => (
                         <Image
                             key={participant.id}
-                            source={{ uri: participant.profileImage }}
+                            source={{ uri: participant.profilePicture }}
                             style={styles.participantImage}
                         />
                     ))}
