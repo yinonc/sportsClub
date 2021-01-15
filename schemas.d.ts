@@ -56,3 +56,19 @@ export interface IEventItem {
     id: string
     bringUsers: UserId[]
 }
+
+export interface RegisterHeaders {
+    Accept: string
+    'Content-Type': string
+}
+
+export interface RegisterBody {
+    dateOfBirth: any
+    email: string
+    password: string
+    region: string
+    profilePicture: string
+    firstName: string
+    lastName: string
+    nickName: string
+}

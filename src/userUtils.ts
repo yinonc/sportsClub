@@ -1,7 +1,7 @@
-import { UserData, userId } from '../schemas'
+import { UserData, userId, RegisterBody } from '../schemas'
 import { getAllMockUsers } from '../mocks/userData'
 import { RegisterScreenState } from './components/screens/registerScreen'
-import constants from './constants'
+import API from './api'
 
 /**
  * This function will be refactored when have server implementation
@@ -77,42 +77,26 @@ export const registerUser = ({
     firstName = '',
     lastName = '',
     nickName = ''
-}): Promise<UserData> => {
-    return fetch('http://3.15.221.85:8082/api/users', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            dateOfBirth,
-            email,
-            firstName,
-            lastName,
-            nickName,
-            password,
-            profilePicture,
-            region
-        })
-    })
-        .then((x) => x.json())
-        .catch((e) => {
-            console.log(e)
-        })
+}: RegisterBody): Promise<UserData> => {
+    const headers = {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+    }
+    const body = {
+        dateOfBirth,
+        email,
+        password,
+        region,
+        profilePicture,
+        firstName,
+        lastName,
+        nickName
+    }
+    return API.registerUser(headers, body)
 }
 
 export const getUserByMail = async (
     email: string
 ): Promise<UserData | null> => {
-    return fetch(`http://3.15.221.85:8082/api/users/email/${email}`)
-        .then((x) => x.json())
-        .then((data) => {
-            if (
-                data.internalErrorCode ===
-                constants.ERROR_CODES.NOT_FOUND_BY_EMAIL
-            ) {
-                return null
-            }
-            return data
-        })
+    return API.getUserByMail(email)
 }
