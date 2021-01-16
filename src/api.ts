@@ -10,7 +10,7 @@ import {
 const SERVER_BASE_URL = 'http://3.15.221.85:8082/'
 
 const fetchAPI = async (url, method, headers = {}, body = {}) => {
-    console.log(`fetchAPI: ${method}`)
+    console.log(`fetchAPI: ${url}, ${method}`)
     console.log('headers')
     console.log(headers)
     console.log('body')
@@ -18,9 +18,7 @@ const fetchAPI = async (url, method, headers = {}, body = {}) => {
     return fetch(url, {
         method: method,
         headers: headers,
-        body: JSON.stringify({
-            body
-        })
+        body: JSON.stringify(body)
     })
         .then((res) => {
             console.log('response', res)
