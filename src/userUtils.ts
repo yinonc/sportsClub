@@ -18,7 +18,7 @@ export const getParticipantsData = (userIds: UserData['id'][]): UserData[] => {
 
 export const DEFAULT_USER_REGION = 'en'
 
-const nickNameRegex = new RegExp(/[a-zA-Z0-9]{6,12}/)
+const nickNameRegex = new RegExp(/[a-zA-Z0-9]/)
 const emailRegex = new RegExp(/^[\w.\-]+@[\w.\-]+\.[A-Za-z]{2,3}$/)
 
 export type UserInputFields = 'nickname' | 'password' | 'rePassword' | 'email'
