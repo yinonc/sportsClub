@@ -119,7 +119,11 @@ class RegisterScreenPure extends React.Component<
     handleRegister = () => {
         if (this.allInputsValid()) {
             registerUser(this.state).then((userData: UserData) => {
-                this.props.setUserData(userData)
+                if (!userData) {
+                    // TODO: notify user
+                } else {
+                    this.props.setUserData(userData)
+                }
             })
         } else {
             this.highlightInvalidInputs()
