@@ -57,24 +57,17 @@ export interface IEventItem {
     bringUsers: UserId[]
 }
 
+export interface ImageDef {
+    uri: string
+    width: number
+    height: number
+    base64: string
+    cancelled?: boolean
+}
+
 export interface RegisterHeaders {
     Accept: string
     'Content-Type': string
-}
-
-export interface EditUserData {
-    id: string
-    firstName?: string
-    lastName?: string
-    nickName?: string
-    dateOfBirth?: string
-    rate?: number
-    profilePicture?: string | null
-    favoriteGames?: GameType[]
-    email?: string
-    friends?: userId[]
-    gamesPlayed?: number
-    region?: string
 }
 
 export interface RegisterBody {

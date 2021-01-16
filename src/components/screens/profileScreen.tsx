@@ -11,12 +11,13 @@ import {
 } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
-import { UserData } from '../../../schemas'
+import { ImageDef, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import GroupBox from '../genericComponents/genericGroupBox'
 import { getGroupsData } from '../../../mocks/userData'
 import generalStyle from '../../styles/generalStyle'
 import Popover, { Rect } from 'react-native-popover-view'
+import * as ImagePicker from 'expo-image-picker'
 import SettingsPopover from '../genericComponents/settingsPopover'
 import { getUserProfilePictureSource } from '../../userUtils'
 import api from '../../api'
@@ -63,24 +64,38 @@ class ProfileScreenPure extends React.Component<
         this.setState({ showSettingsMenu: !this.state.showSettingsMenu })
     }
 
-    getNewImage = async (): Promise<ImageBitmap> => {
-        // TODO: implement camera & files new image
-        // @ts-ignore
-        return ''
+    getNewImage = async (): Promise<ImageDef | null> => {
+        let result = (await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+            base64: true
+        })) as ImageDef
+
+        return result.cancelled
+            ? null
+            : {
+                  uri: result.uri,
+                  width: result.width,
+                  height: result.height,
+                  base64: result.base64
+              }
     }
 
     editImage = async () => {
         const newImage = await this.getNewImage()
         if (newImage) {
-            const newImageUri = await api.uploadImage(newImage)
-            if (newImageUri) {
-                await api.editUser({
-                    id: this.props.userData.id,
-                    profilePicture: newImageUri
-                })
+            const newImageURL = await api.uploadImage(newImage)
+            if (newImageURL) {
+                // TODO: re-enable it when the API works - check first from swagger
+                // await api.editUser({
+                //     ...this.props.userData,
+                //     profilePicture: newImageURL
+                // })
                 this.props.setUserData({
                     ...this.props.userData,
-                    profilePicture: newImageUri
+                    profilePicture: newImageURL
                 })
             } else {
                 //TODO: notify something went wrong
