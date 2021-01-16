@@ -9,11 +9,7 @@ import { getMockUserData } from '../../../mocks/userData'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { SocialIcon, Input } from 'react-native-elements'
 import constants from '../../constants'
-import {
-    registerUser,
-    getUserByMail,
-    DEFAULT_USER_REGION
-} from '../../userUtils'
+import { registerUser, DEFAULT_USER_REGION } from '../../userUtils'
 import * as Crypto from 'expo-crypto'
 
 interface LoginScreenProps {
@@ -90,7 +86,7 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
             )
             const resJson = (await response.json()) as FacebookUserData
 
-            let userData = await getUserByMail(resJson.email)
+            let userData = null
             if (!userData) {
                 const passwordFromEmail = await Crypto.digestStringAsync(
                     Crypto.CryptoDigestAlgorithm.SHA256,

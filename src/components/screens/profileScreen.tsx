@@ -86,7 +86,7 @@ class ProfileScreenPure extends React.Component<
         if (newImage) {
             const newImageURL = await api.uploadImage(newImage)
             if (newImageURL) {
-                // TODO: re-enable it when the API works - check first from swagger
+                // TODO: re-enable it when the API for images exist
                 // await api.editUser({
                 //     id: this.props.userData.id,
                 //     profilePicture: newImageURL

@@ -76,20 +76,5 @@ export default {
         //     'Content-Type': 'application/json'
         // }
         // return fetchAPI(`${SERVER_BASE_URL}api/images`, 'POST', headers, image)
-    },
-
-    async getUserByMail(email: string): Promise<UserData | null> {
-        return fetchAPI(
-            `${SERVER_BASE_URL}api/users/email/${email}`,
-            'GET'
-        ).then((data) => {
-            if (
-                data.internalErrorCode ===
-                constants.ERROR_CODES.NOT_FOUND_BY_EMAIL
-            ) {
-                return null
-            }
-            return data
-        })
     }
 }

@@ -103,9 +103,3 @@ export const registerUser = ({
     }
     return API.registerUser(headers, body)
 }
-
-export const getUserByMail = async (
-    email: string
-): Promise<UserData | null> => {
-    return API.getUserByMail(email)
-}
