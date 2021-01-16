@@ -1,5 +1,11 @@
 import constants from './constants'
-import { UserData, RegisterHeaders, RegisterBody, ImageDef } from '../schemas'
+import {
+    UserData,
+    RegisterHeaders,
+    RegisterBody,
+    ImageDef,
+    EditUserData
+} from '../schemas'
 
 const SERVER_BASE_URL = 'http://3.15.221.85:8082/'
 
@@ -26,7 +32,7 @@ export default {
         return fetchAPI(`${SERVER_BASE_URL}api/users`, 'POST', headers, body)
     },
 
-    async editUser(newUserData: UserData): Promise<UserData> {
+    async editUser(newUserData: EditUserData): Promise<UserData> {
         const headers = {
             Accept: 'application/json',
             'Content-Type': 'application/json'
@@ -36,6 +42,28 @@ export default {
             'PUT',
             headers,
             newUserData
+        )
+    },
+
+    async editUserPassword(
+        id: string,
+        password: string,
+        newPassword: string
+    ): Promise<boolean> {
+        const headers = {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            id,
+            password,
+            newPassword
+        }
+        return fetchAPI(
+            `${SERVER_BASE_URL}api/users/password`,
+            'PUT',
+            headers,
+            body
         )
     },
 

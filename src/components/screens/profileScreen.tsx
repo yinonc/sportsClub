@@ -27,8 +27,6 @@ interface ProfileScreenStateProps {
     userData: UserData
 }
 
-//https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10221941940800653&height=50&width=50&ext=1612802960&hash=AeQXs53qppd0dhY05ps
-
 function calculateAge(dateString: string): number {
     const date = new Date(dateString)
     const ageDifMs = Date.now() - date.getTime()
@@ -90,7 +88,7 @@ class ProfileScreenPure extends React.Component<
             if (newImageURL) {
                 // TODO: re-enable it when the API works - check first from swagger
                 // await api.editUser({
-                //     ...this.props.userData,
+                //     id: this.props.userData.id,
                 //     profilePicture: newImageURL
                 // })
                 this.props.setUserData({
