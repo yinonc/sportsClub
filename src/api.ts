@@ -22,14 +22,18 @@ const fetchAPI = async (url, method, headers = {}, body = {}) => {
             body
         })
     })
-        .then((x) => x.json())
         .then((res) => {
-            if (res.status && res.status !== 200) {
-                console.log(`Error in fetchAPI: ${res.status}`)
-                console.log(res.error)
-                throw new Error(res.error)
+            console.log('response json')
+            return res.json()
+        })
+        .then((resJSON) => {
+            console.log('res', resJSON)
+            if (resJSON.status && resJSON.status !== 200) {
+                console.log(`Error in fetchAPI: ${resJSON.status}`)
+                console.log(resJSON.error)
+                throw new Error(resJSON.error)
             }
-            return res
+            return resJSON
         })
         .catch((e) => {
             console.log(e)
