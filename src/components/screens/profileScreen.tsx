@@ -74,17 +74,15 @@ class ProfileScreenPure extends React.Component<
         if (newImage) {
             const newImageUri = await api.uploadImage(newImage)
             if (newImageUri) {
-
-            await api.editUser({
-                id: this.props.userData.id,
-                profilePicture: newImageUri
-            })
-            this.props.setUserData({
-                ...this.props.userData,
-                profilePicture: newImageUri
-            })
-            }
-            else {
+                await api.editUser({
+                    id: this.props.userData.id,
+                    profilePicture: newImageUri
+                })
+                this.props.setUserData({
+                    ...this.props.userData,
+                    profilePicture: newImageUri
+                })
+            } else {
                 //TODO: notify something went wrong
             }
         }
