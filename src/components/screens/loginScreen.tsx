@@ -125,7 +125,7 @@ class LoginScreenPure extends React.Component<LoginScreenProps> {
                 <View style={styles.formContent}>
                     <Input
                         containerStyle={styles.emailInput}
-                        placeholder="Email or UserName"
+                        placeholder="Email"
                         leftIcon={
                             <MaterialCommunityIcons
                                 name="email"

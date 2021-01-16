@@ -33,10 +33,10 @@ export const userFieldsValidations: {
 } = {
     nickname: ({ nickname }): string => {
         if (!nickname) {
-            return 'Must fill a username'
+            return 'Must fill a nickname'
         }
         if (nickname.length < 2 || nickname.length > 20) {
-            return 'Username must be between 2 and 20 length'
+            return 'Nickname must be between 2 and 20 length'
         }
         if (!nickNameRegex.test(nickname)) {
             return 'Nickname must be letters and numbers only'
