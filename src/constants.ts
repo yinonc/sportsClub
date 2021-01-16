@@ -46,6 +46,7 @@ export default {
         }
     },
     ERROR_CODES: {
-        NOT_FOUND_BY_EMAIL: 1000
+        ID_DOESNT_EXIST: 1000,
+        INCORRECT_PASSWORD: 1001
     }
 }
