@@ -22,9 +22,12 @@ const fetchAPI = async (url, method, headers = {}, body = {}) => {
             body
         })
     })
-        .then((res) => res.json())
+        .then((res) => {
+            console.log('response', res)
+            return res.json()
+        })
         .then((resJSON) => {
-            console.log('res', resJSON)
+            console.log('responseJSON', resJSON)
             if (resJSON.status && resJSON.status !== 200) {
                 console.log(`Error in fetchAPI: ${resJSON.status}`)
                 console.log(resJSON.error)
