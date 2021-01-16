@@ -19,7 +19,7 @@ export const userInputsData: UserInputField[] = [
     { key: 'email', placeholder: 'Email' },
     { key: 'password', placeholder: 'Password' },
     { key: 'rePassword', placeholder: 'RePassword' },
-    { key: 'nickname', placeholder: 'Nickname' }
+    { key: 'nickName', placeholder: 'nickName' }
 ]
 
 const securedInputs = new Set<UserInputFields>(['password', 'rePassword'])
@@ -76,7 +76,7 @@ export interface RegisterScreenState {
     email: string
     region: string
     password: string
-    nickname: string
+    nickName: string
     rePassword: string
     dateOfBirth: string
     termsChecked: boolean
@@ -91,7 +91,7 @@ class RegisterScreenPure extends React.Component<
         super(props)
         const currentDate = getCurrentDate()
         this.state = {
-            nickname: '',
+            nickName: '',
             email: '',
             password: '',
             rePassword: '',

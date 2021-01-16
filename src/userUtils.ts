@@ -21,7 +21,7 @@ export const DEFAULT_USER_REGION = 'en'
 const nickNameRegex = new RegExp(/[a-zA-Z0-9]/)
 const emailRegex = new RegExp(/^[\w.\-]+@[\w.\-]+\.[A-Za-z]{2,3}$/)
 
-export type UserInputFields = 'nickname' | 'password' | 'rePassword' | 'email'
+export type UserInputFields = 'nickName' | 'password' | 'rePassword' | 'email'
 
 export interface UserInputField {
     key: UserInputFields
@@ -31,15 +31,15 @@ export interface UserInputField {
 export const userFieldsValidations: {
     [key in UserInputFields]: (state: RegisterScreenState) => string
 } = {
-    nickname: ({ nickname }): string => {
-        if (!nickname) {
-            return 'Must fill a nickname'
+    nickName: ({ nickName }): string => {
+        if (!nickName) {
+            return 'Must fill a nickName'
         }
-        if (nickname.length < 2 || nickname.length > 20) {
-            return 'Nickname must be between 2 and 20 length'
+        if (nickName.length < 2 || nickName.length > 20) {
+            return 'nickName must be between 2 and 20 length'
         }
-        if (!nickNameRegex.test(nickname)) {
-            return 'Nickname must be letters and numbers only'
+        if (!nickNameRegex.test(nickName)) {
+            return 'nickName must be letters and numbers only'
         }
         return ''
     },

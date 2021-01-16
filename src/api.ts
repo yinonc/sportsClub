@@ -10,6 +10,8 @@ import {
 const SERVER_BASE_URL = 'http://3.15.221.85:8082/'
 
 const fetchAPI = async (url, method, headers = {}, body = {}) => {
+    console.log('fetchAPI')
+    console.log(body)
     return fetch(url, {
         method: method,
         headers: headers,
