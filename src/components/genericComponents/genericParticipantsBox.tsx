@@ -1,6 +1,7 @@
 import { UserData } from '../../../schemas'
 import React from 'react'
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native'
+import { getUserProfilePictureSource } from '../../userUtils'
 
 export interface ParticipantsBoxProps {
     participants: UserData[]
@@ -53,7 +54,9 @@ export default class ParticipantsBox extends React.Component<
                         >
                             <View style={styles.participantImageWrapper}>
                                 <Image
-                                    source={{ uri: participant.profilePicture }}
+                                    source={getUserProfilePictureSource(
+                                        participant
+                                    )}
                                     style={styles.participantImage}
                                 />
                             </View>

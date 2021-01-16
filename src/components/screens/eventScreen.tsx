@@ -6,7 +6,10 @@ import MapView, { Marker } from 'react-native-maps'
 import EventItemSlider from '../genericComponents/eventItemSlider'
 import { AppState } from '../../appState/appInitialState'
 import { connect } from 'react-redux'
-import { getParticipantsData } from '../../userUtils'
+import {
+    getParticipantsData,
+    getUserProfilePictureSource
+} from '../../userUtils'
 
 interface EventScreenProps {
     currentUserData: UserData
@@ -64,7 +67,9 @@ class EventScreenPure extends React.Component<
                         {participantsData.map((participant) => (
                             <Image
                                 key={participant.id}
-                                source={{ uri: participant.profilePicture }}
+                                source={getUserProfilePictureSource(
+                                    participant
+                                )}
                                 style={styles.participantImage}
                             />
                         ))}

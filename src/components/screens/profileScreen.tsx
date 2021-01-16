@@ -17,6 +17,7 @@ import { getGroupsData } from '../../../mocks/userData'
 import generalStyle from '../../styles/generalStyle'
 import Popover, { Rect } from 'react-native-popover-view'
 import SettingsPopover from '../genericComponents/settingsPopover'
+import { getUserProfilePictureSource } from '../../userUtils'
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -47,6 +48,7 @@ class ProfileScreenPure extends React.Component<
     }
 
     render() {
+        const { userData } = this.props
         return (
             <View
                 style={styles.container}
@@ -76,13 +78,11 @@ class ProfileScreenPure extends React.Component<
                     <View style={styles.headerContent}>
                         <Image
                             style={styles.avatar}
-                            source={{
-                                uri: this.props.userData.profilePicture
-                            }}
+                            source={getUserProfilePictureSource(userData)}
                         />
                         <Text
                             style={styles.name}
-                        >{`${this.props.userData.firstName} ${this.props.userData.lastName}`}</Text>
+                        >{`${userData.firstName} ${userData.lastName}`}</Text>
                         <View style={styles.locationInfo}>
                             <MaterialCommunityIcons
                                 name="map-marker"
@@ -106,22 +106,20 @@ class ProfileScreenPure extends React.Component<
                 <View style={styles.body}>
                     <View style={styles.boxesWrapper}>
                         <View style={styles.menuBox}>
-                            <Text style={styles.info}>
-                                {this.props.userData.rate}
-                            </Text>
+                            <Text style={styles.info}>{userData.rate}</Text>
                             <Text style={styles.info}>Rate</Text>
                         </View>
 
                         <View style={styles.menuBox}>
                             <Text style={styles.info}>
-                                {this.props.userData.gamesPlayed}
+                                {userData.gamesPlayed}
                             </Text>
                             <Text style={styles.info}>Games</Text>
                         </View>
 
                         <View style={styles.menuBox}>
                             <View style={styles.favoriteGameWrapper}>
-                                {this.props.userData.favoriteGames
+                                {userData.favoriteGames
                                     .slice(0, 2)
                                     .map((game) => (
                                         <MaterialCommunityIcons
@@ -140,7 +138,7 @@ class ProfileScreenPure extends React.Component<
                     </View>
                     <View style={styles.age}>
                         <Text style={styles.ageName}>{`Age: ${calculateAge(
-                            this.props.userData.dateOfBirth
+                            userData.dateOfBirth
                         )}`}</Text>
                     </View>
                     <View style={styles.groupsHeader}>

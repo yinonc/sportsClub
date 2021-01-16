@@ -20,7 +20,7 @@ export interface UserData {
     nickName: string
     dateOfBirth: string
     rate: number
-    profilePicture: string
+    profilePicture: string | null
     favoriteGames: GameType[]
     email?: string
     friends: userId[]

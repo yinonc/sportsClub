@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import { SportEvent, UserData } from '../../../schemas'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MapView, { Marker } from 'react-native-maps'
+import { getUserProfilePictureSource } from '../../userUtils'
 
 interface EventScreenProps {
     route: {
@@ -39,7 +40,7 @@ export default class EventScreen extends React.Component<EventScreenProps> {
                     {participantsData.map((participant) => (
                         <Image
                             key={participant.id}
-                            source={{ uri: participant.profilePicture }}
+                            source={getUserProfilePictureSource(participant)}
                             style={styles.participantImage}
                         />
                     ))}

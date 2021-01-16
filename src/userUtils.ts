@@ -2,6 +2,7 @@ import { UserData, userId, RegisterBody } from '../schemas'
 import { getAllMockUsers } from '../mocks/userData'
 import { RegisterScreenState } from './components/screens/registerScreen'
 import API from './api'
+import { ImageSourcePropType } from 'react-native'
 
 /**
  * This function will be refactored when have server implementation
@@ -66,6 +67,14 @@ export const userFieldsValidations: {
         }
         return ''
     }
+}
+
+export const getUserProfilePictureSource = (
+    userData: UserData
+): ImageSourcePropType => {
+    return userData.profilePicture
+        ? { uri: userData.profilePicture }
+        : require('../assets/defaultProfileImage.jpg')
 }
 
 export const registerUser = ({
