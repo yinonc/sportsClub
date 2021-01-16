@@ -62,6 +62,21 @@ export interface RegisterHeaders {
     'Content-Type': string
 }
 
+export interface EditUserData {
+    id: string
+    firstName?: string
+    lastName?: string
+    nickName?: string
+    dateOfBirth?: string
+    rate?: number
+    profilePicture?: string | null
+    favoriteGames?: GameType[]
+    email?: string
+    friends?: userId[]
+    gamesPlayed?: number
+    region?: string
+}
+
 export interface RegisterBody {
     dateOfBirth: any
     email: string

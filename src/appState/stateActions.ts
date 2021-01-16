@@ -10,3 +10,8 @@ export const getUserDataAction = (userData: UserData) => ({
     type: stateTypes.LOGIN,
     userData
 })
+
+export const setUserDataAction = (userData: UserData) => ({
+    type: stateTypes.SET_USER_DATA,
+    userData
+})

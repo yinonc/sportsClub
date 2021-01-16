@@ -6,6 +6,7 @@ import {
     Image,
     ScrollView,
     TouchableHighlight,
+    TouchableOpacity,
     Dimensions
 } from 'react-native'
 import { AppState } from '../../appState/appInitialState'
@@ -18,6 +19,8 @@ import generalStyle from '../../styles/generalStyle'
 import Popover, { Rect } from 'react-native-popover-view'
 import SettingsPopover from '../genericComponents/settingsPopover'
 import { getUserProfilePictureSource } from '../../userUtils'
+import api from '../../api'
+import { setUserDataAction } from '../../appState/stateActions'
 
 interface ProfileScreenStateProps {
     userData: UserData
@@ -37,8 +40,21 @@ interface ProfileScreenState {
     popoverWidth: number
 }
 
+interface ProfileScreenDispatchProps {
+    setUserData(newUserData: UserData): void
+}
+
+interface ProfileScreenOwnProps {
+    profileUserData?: UserData
+}
+
+interface ProfileScreenProps
+    extends ProfileScreenOwnProps,
+        ProfileScreenDispatchProps,
+        ProfileScreenStateProps {}
+
 class ProfileScreenPure extends React.Component<
-    ProfileScreenStateProps,
+    ProfileScreenProps,
     ProfileScreenState
 > {
     state = { showSettingsMenu: false, popoverWidth: 200 }
@@ -47,8 +63,38 @@ class ProfileScreenPure extends React.Component<
         this.setState({ showSettingsMenu: !this.state.showSettingsMenu })
     }
 
+    getNewImage = async (): Promise<ImageBitmap> => {
+        // TODO: implement camera & files new image
+        // @ts-ignore
+        return ''
+    }
+
+    editImage = async () => {
+        const newImage = await this.getNewImage()
+        if (newImage) {
+            const newImageUri = await api.uploadImage(newImage)
+            if (newImageUri) {
+
+            await api.editUser({
+                id: this.props.userData.id,
+                profilePicture: newImageUri
+            })
+            this.props.setUserData({
+                ...this.props.userData,
+                profilePicture: newImageUri
+            })
+            }
+            else {
+                //TODO: notify something went wrong
+            }
+        }
+    }
+
     render() {
-        const { userData } = this.props
+        const userData = this.props.profileUserData || this.props.userData
+        const isCurrentUserProfile =
+            !this.props.profileUserData ||
+            this.props.profileUserData.id === this.props.userData.id
         return (
             <View
                 style={styles.container}
@@ -76,10 +122,24 @@ class ProfileScreenPure extends React.Component<
                         />
                     </View>
                     <View style={styles.headerContent}>
-                        <Image
-                            style={styles.avatar}
-                            source={getUserProfilePictureSource(userData)}
-                        />
+                        <View>
+                            <Image
+                                style={styles.avatar}
+                                source={getUserProfilePictureSource(userData)}
+                            />
+                            {isCurrentUserProfile ? (
+                                <TouchableOpacity
+                                    style={styles.editImageIcon}
+                                    onPress={this.editImage}
+                                >
+                                    <MaterialCommunityIcons
+                                        name="square-edit-outline"
+                                        size={25}
+                                        color="#000000"
+                                    />
+                                </TouchableOpacity>
+                            ) : null}
+                        </View>
                         <Text
                             style={styles.name}
                         >{`${userData.firstName} ${userData.lastName}`}</Text>
@@ -165,7 +225,11 @@ const mapStateToProps = (state: AppState): ProfileScreenStateProps => ({
     userData: state.userData
 })
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    setUserData: (newUserData: UserData) => {
+        dispatch(setUserDataAction(newUserData))
+    }
+})
 
 const ProfileScreen = connect(
     mapStateToProps, // called every time state is changed
@@ -203,6 +267,11 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: 'white',
         marginBottom: 10
+    },
+    editImageIcon: {
+        position: 'absolute',
+        right: 15,
+        top: 15
     },
     locationInfo: {
         flexDirection: 'row'
