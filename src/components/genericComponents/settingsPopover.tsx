@@ -1,8 +1,9 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import { connect } from 'react-redux'
 import { AppState } from '../../appState/appInitialState'
+import PrivacyScreen from '../../components/screens/privacyScreen'
 
 interface SettingItem {
     name: string
@@ -24,27 +25,29 @@ class SettingsPopover extends React.Component<SettingsPopoverProps> {
     render() {
         return (
             <View style={[styles.container, { width: this.props.width }]}>
+
                 <ScrollView style={{ height: SETTINGS_POPOVER_HEIGHT }}>
                     {this.props.settingItems.map((settingItem, index) => (
                         <View
                             key={settingItem.name}
-                            style={[
+                        >
+                            <TouchableOpacity onPress={settingItem.handler} style={[
                                 styles.settingItem,
                                 index === this.props.settingItems.length - 1
                                     ? styles.noBorder
                                     : styles.withBorder
-                            ]}
-                        >
-                            <MaterialCommunityIcons
-                                name={settingItem.iconName}
-                                size={20}
-                                color="#000"
-                            />
-                            <View style={styles.settingItemNameWrapper}>
-                                <Text style={styles.settingItemName}>
-                                    {settingItem.name}
-                                </Text>
-                            </View>
+                            ]}>
+                                <MaterialCommunityIcons
+                                    name={settingItem.iconName}
+                                    size={20}
+                                    color="#000"
+                                />
+                                <View style={styles.settingItemNameWrapper}>
+                                    <Text style={styles.settingItemName}>
+                                        {settingItem.name}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         </View>
                     ))}
                 </ScrollView>
@@ -99,7 +102,10 @@ const mapStateToProps = (state: AppState): SettingsPopoverStateProps => {
             {
                 name: 'Privacy',
                 iconName: 'security',
-                handler: () => {}
+                handler: () => {
+                    console.log('moving -> Privacy sc')
+                    
+                }
             },
             {
                 name: 'Archive',
